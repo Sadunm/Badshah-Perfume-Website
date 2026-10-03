@@ -1,5 +1,6 @@
 import React from 'react';
 import { Order, AppConfig } from '../types/index.ts';
+import { BottleImageWithOverlay } from '../components/BottleImageWithOverlay.tsx';
 import {
   CheckCircle2,
   Crown,
@@ -130,12 +131,16 @@ export const OrderConfirmationPage: React.FC<OrderConfirmationPageProps> = ({
                   className="flex items-center justify-between p-3.5 rounded-lg bg-[#141419] border border-[#1e1e26] text-xs"
                 >
                   <div className="flex items-center gap-3">
-                    <img
-                      src={item.productImage}
-                      alt={item.productName}
-                      referrerPolicy="no-referrer"
-                      className="w-12 h-12 rounded object-cover bg-[#1c1c24]"
-                    />
+                    <div className="w-12 h-12 shrink-0 overflow-hidden rounded bg-[#1c1c24]">
+                      <BottleImageWithOverlay
+                        image={item.productImage}
+                        name={item.productName}
+                        className="h-full w-full object-contain object-center"
+                        aspectRatio="aspect-square"
+                        showNameSticker
+                        compact
+                      />
+                    </div>
                     <div>
                       <h4 className="font-bold text-white text-sm">{item.productName}</h4>
                       <span className="text-[11px] text-[#10b981] font-medium">

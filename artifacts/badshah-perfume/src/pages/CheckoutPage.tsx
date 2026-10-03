@@ -4,6 +4,7 @@ import { useSiteSettings } from '../context/SiteSettingsContext.tsx';
 import { useCustomerAuth } from '../context/CustomerAuthContext.tsx';
 import { DeliveryLocation, Order } from '../types/index.ts';
 import { api } from '../services/api.ts';
+import { BottleImageWithOverlay } from '../components/BottleImageWithOverlay.tsx';
 import {
   ArrowLeft,
   ShieldCheck,
@@ -463,12 +464,16 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBack, onOrderSucce
                 className="flex items-center justify-between gap-3 p-3 rounded-lg bg-[#141419] border border-[#1f1f26]"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <img
-                    src={item.productImage}
-                    alt={item.productName}
-                    referrerPolicy="no-referrer"
-                    className="w-12 h-12 rounded object-cover bg-[#1c1c24] shrink-0"
-                  />
+                  <div className="w-12 h-12 shrink-0 overflow-hidden rounded bg-[#1c1c24]">
+                    <BottleImageWithOverlay
+                      image={item.productImage}
+                      name={item.productName}
+                      className="h-full w-full object-contain object-center"
+                      aspectRatio="aspect-square"
+                      showNameSticker
+                      compact
+                    />
+                  </div>
                   <div className="min-w-0">
                     <h4 className="text-xs font-bold text-white truncate">
                       {item.productName}

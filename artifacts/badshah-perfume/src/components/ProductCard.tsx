@@ -1,8 +1,7 @@
 import React from 'react';
-import { Product } from '../types/index.ts';
+import { DEFAULT_PERFUME_BOTTLE_IMAGE_URL, Product } from '../types/index.ts';
 import { ArrowRight } from 'lucide-react';
 import { BottleImageWithOverlay } from './BottleImageWithOverlay.tsx';
-import commonBottleImage from '../assets/badshah-common-bottle.png';
 
 interface ProductCardProps {
   product: Product;
@@ -18,9 +17,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect }) =
       {/* Product Image Area with Dynamic Luxury Label Overlay */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#16161c]">
         <BottleImageWithOverlay
-          image={commonBottleImage}
+          image={DEFAULT_PERFUME_BOTTLE_IMAGE_URL}
           name={product.name}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-contain object-center"
           aspectRatio="aspect-[4/3]"
           showNameSticker
         />

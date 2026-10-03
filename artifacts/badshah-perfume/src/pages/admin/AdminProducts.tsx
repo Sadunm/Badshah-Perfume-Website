@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Product, ProductSize, StockStatus } from '../../types/index.ts';
+import {
+  DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
+  Product,
+  ProductSize,
+  StockStatus,
+} from '../../types/index.ts';
 import { api } from '../../services/api.ts';
 import { importCsvPrices, CsvImportResult } from '../../utils/importCsvPrices.ts';
+import { BottleImageWithOverlay } from '../../components/BottleImageWithOverlay.tsx';
 import {
   Plus,
   Edit2,
@@ -81,7 +87,7 @@ export const AdminProducts: React.FC = () => {
   const openAddModal = () => {
     setEditingProduct(null);
     setName('');
-    setImage('');
+    setImage(DEFAULT_PERFUME_BOTTLE_IMAGE_URL);
     setFragranceType('');
     setLongevity('10-14+ Hours Longevity');
     setFragranceNotes('');
@@ -161,7 +167,7 @@ export const AdminProducts: React.FC = () => {
 
       const payload = {
         name: name.trim(),
-        image: image.trim(),
+        image: image.trim() || DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
         fragranceType: fragranceType.trim(),
         longevity: longevity.trim(),
         fragranceNotes: fragranceNotes.trim(),
@@ -340,12 +346,16 @@ export const AdminProducts: React.FC = () => {
                   <tr key={p.id} className="hover:bg-[#121217] transition-colors">
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-3">
-                        <img
-                          src={p.image}
-                          alt={p.name}
-                          referrerPolicy="no-referrer"
-                          className="w-10 h-10 rounded-lg object-cover bg-[#1c1c24] shrink-0"
-                        />
+                        <div className="w-10 h-10 shrink-0 overflow-hidden rounded-lg bg-[#1c1c24]">
+                          <BottleImageWithOverlay
+                            image={p.image}
+                            name={p.name}
+                            className="h-full w-full object-contain object-center"
+                            aspectRatio="aspect-square"
+                            showNameSticker
+                            compact
+                          />
+                        </div>
                         <div>
                           <div className="font-bold text-white text-sm">{p.name}</div>
                           <div className="text-[11px] text-[#71717a] line-clamp-1">{p.longevity}</div>
@@ -486,16 +496,30 @@ export const AdminProducts: React.FC = () => {
                     />
                   </label>
                 </div>
-                {image && (
-                  <div className="flex items-center gap-3 p-2 rounded bg-[#16161f] border border-[#22222d]">
-                    <img
-                      src={image}
-                      alt="Preview"
-                      className="w-12 h-12 rounded object-cover"
+                <div className="flex flex-wrap items-center gap-3 rounded-xl border border-[#22222d] bg-[#16161f] p-3">
+                  <div className="w-44 overflow-hidden rounded-lg border border-[#302a20] bg-[#0b0b0c]">
+                    <BottleImageWithOverlay
+                      image={image || DEFAULT_PERFUME_BOTTLE_IMAGE_URL}
+                      name={name || 'আপনার পারফিউমের নাম'}
+                      className="h-full w-full object-contain object-center"
+                      aspectRatio="aspect-[4/3]"
+                      showNameSticker
                     />
-                    <span className="text-[11px] text-[#71717a] truncate">{image}</span>
                   </div>
-                )}
+                  <div className="max-w-sm">
+                    <p className="text-xs font-semibold text-white">বোতলের লেবেল প্রিভিউ</p>
+                    <p className="mt-1 text-[11px] leading-relaxed text-[#92929c]">
+                      নাম বদলালে লেবেলও সঙ্গে সঙ্গে আপডেট হবে; বড় নাম হলে লেখা নিজে থেকেই ছোট হবে।
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setImage(DEFAULT_PERFUME_BOTTLE_IMAGE_URL)}
+                      className="mt-2 text-[11px] font-semibold text-emerald-400 hover:text-emerald-300"
+                    >
+                      অটো বোতলের ছবি ব্যবহার করুন
+                    </button>
+                  </div>
+                </div>
               </div>
 
               {/* Fragrance Type & Longevity */}

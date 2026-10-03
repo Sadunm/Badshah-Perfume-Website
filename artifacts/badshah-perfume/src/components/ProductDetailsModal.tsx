@@ -105,12 +105,13 @@ export const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-start">
           {/* Product Image */}
           <div className="sm:col-span-5">
-            <div className="relative aspect-[4/3] sm:aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#16161c] border border-[#242432] shadow-xl">
+            <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden bg-[#16161c] border border-[#242432] shadow-xl">
               <BottleImageWithOverlay
                 image={product.image}
                 name={product.name}
-                className="w-full h-full object-cover object-center"
-                aspectRatio="aspect-[4/3] sm:aspect-[3/4]"
+                className="w-full h-full object-contain object-center"
+                aspectRatio="aspect-[4/3]"
+                showNameSticker
               />
               {isOutOfStock && (
                 <div className="absolute top-3 right-3 z-10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-red-950/90 text-red-300 border border-red-800 rounded">

@@ -83,8 +83,9 @@ export const ProductDetailsPage: React.FC<ProductDetailsPageProps> = ({
             <BottleImageWithOverlay
               image={product.image}
               name={product.name}
-              className="w-full h-full object-cover object-center"
+              className="w-full h-full object-contain object-center"
               aspectRatio="aspect-[4/3]"
+              showNameSticker
             />
             {isOutOfStock && (
               <div className="absolute top-4 right-4 z-10 bg-red-950/90 text-red-200 border border-red-700/50 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider backdrop-blur-md">

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X, Trash2, Plus, Minus, ArrowRight, ShoppingBag, ShieldCheck } from 'lucide-react';
+import { BottleImageWithOverlay } from './BottleImageWithOverlay.tsx';
 import { useCart } from '../context/CartContext.tsx';
 import { useSiteSettings } from '../context/SiteSettingsContext.tsx';
 import { WHOLESALE_MIN_ML } from '../types/index.ts';
@@ -121,12 +122,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onCheckout, onExplore })
                   key={`${item.productId}-${item.sizeLabel}`}
                   className="flex gap-4 p-3.5 rounded-lg bg-[#141419] border border-[#202028]"
                 >
-                  <img
-                    src={item.productImage}
-                    alt={item.productName}
-                    referrerPolicy="no-referrer"
-                    className="w-16 h-16 rounded object-cover object-center bg-[#1d1d26] shrink-0"
-                  />
+                  <div className="w-16 h-16 shrink-0 overflow-hidden rounded bg-[#1d1d26]">
+                    <BottleImageWithOverlay
+                      image={item.productImage}
+                      name={item.productName}
+                      className="h-full w-full object-contain object-center"
+                      aspectRatio="aspect-square"
+                      showNameSticker
+                      compact
+                    />
+                  </div>
                   <div className="flex-1 min-w-0 flex flex-col justify-between">
                     <div>
                       <div className="flex items-start justify-between gap-2">

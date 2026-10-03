@@ -7,6 +7,7 @@ export type DeliveryLocation = 'inside_dhaka' | 'outside_dhaka';
 export type ReviewStatus = 'Pending' | 'Approved' | 'Rejected';
 
 export const WHOLESALE_MIN_ML = 50;
+export const DEFAULT_PERFUME_BOTTLE_IMAGE_URL = '/images/perfume-bottle-template.png';
 
 export interface ProductSize {
   id: string;

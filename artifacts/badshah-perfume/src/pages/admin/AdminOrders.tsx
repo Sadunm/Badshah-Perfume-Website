@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Order, OrderStatus } from '../../types/index.ts';
 import { api } from '../../services/api.ts';
 import { subscribeToRealtimeTable } from '../../services/supabase.ts';
+import { BottleImageWithOverlay } from '../../components/BottleImageWithOverlay.tsx';
 import {
   Search,
   Eye,
@@ -421,12 +422,16 @@ export const AdminOrders: React.FC = () => {
                     className="flex items-center justify-between p-3 rounded-xl bg-[#141419] border border-[#202028] text-xs"
                   >
                     <div className="flex items-center gap-3">
-                      <img
-                        src={item.productImage}
-                        alt={item.productName}
-                        referrerPolicy="no-referrer"
-                        className="w-10 h-10 rounded object-cover bg-[#1c1c24]"
-                      />
+                      <div className="w-10 h-10 shrink-0 overflow-hidden rounded bg-[#1c1c24]">
+                        <BottleImageWithOverlay
+                          image={item.productImage}
+                          name={item.productName}
+                          className="h-full w-full object-contain object-center"
+                          aspectRatio="aspect-square"
+                          showNameSticker
+                          compact
+                        />
+                      </div>
                       <div>
                         <div className="font-bold text-white">{item.productName}</div>
                         <div className="text-[11px] text-[#10b981]">

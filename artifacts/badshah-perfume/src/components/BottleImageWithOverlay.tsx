@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSiteSettings } from '../context/SiteSettingsContext.tsx';
 import { Crown } from 'lucide-react';
+import { DEFAULT_PERFUME_BOTTLE_IMAGE_URL } from '../types/index.ts';
 
 interface BottleImageWithOverlayProps {
   image?: string;
@@ -8,6 +9,7 @@ interface BottleImageWithOverlayProps {
   className?: string;
   aspectRatio?: string;
   showNameSticker?: boolean;
+  compact?: boolean;
 }
 
 export const BottleImageWithOverlay: React.FC<BottleImageWithOverlayProps> = ({
@@ -16,13 +18,13 @@ export const BottleImageWithOverlay: React.FC<BottleImageWithOverlayProps> = ({
   className = 'w-full h-full object-cover object-center',
   aspectRatio = 'aspect-[4/3]',
   showNameSticker = false,
+  compact = false,
 }) => {
   const { settings } = useSiteSettings();
   const [imgError, setImgError] = useState(false);
 
   const defaultMasterBottle =
-    settings.defaultBottleImageUrl ||
-    'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1000';
+    settings.defaultBottleImageUrl || DEFAULT_PERFUME_BOTTLE_IMAGE_URL;
 
   // Determine if product has unique custom image or needs default bottle with label overlay
   const hasCustomImage = Boolean(
@@ -44,13 +46,13 @@ export const BottleImageWithOverlay: React.FC<BottleImageWithOverlayProps> = ({
     return 'text-sm sm:text-base tracking-[0.2em] leading-snug';
   };
 
-  const getStickerFontSizeClass = (text: string) => {
-    const len = text.length;
-    if (len > 28) return 'text-[7px] sm:text-[8px] tracking-tight leading-tight';
-    if (len > 20) return 'text-[8px] sm:text-[9px] tracking-tight leading-tight';
-    if (len > 12) return 'text-[9px] sm:text-[10px] tracking-wide leading-tight';
-    return 'text-[10px] sm:text-[11px] tracking-wide leading-tight';
-  };
+  const stickerFontSize = Math.min(
+    20,
+    (compact ? 190 : 220) / Math.max(8, name.trim().length)
+  );
+  const stickerSizeClass = compact
+    ? 'h-[34%] max-h-[22px] w-[45%] max-w-[48px] min-h-0 min-w-0 rounded-[1px] px-0.5 py-0'
+    : 'h-[13%] min-h-[25px] max-h-[42px] w-[28%] min-w-[60px] max-w-[142px] rounded-[2px] px-1.5 py-0.5';
 
   return (
     <div className={`relative ${aspectRatio} w-full overflow-hidden bg-[#121217]`}>
@@ -64,11 +66,16 @@ export const BottleImageWithOverlay: React.FC<BottleImageWithOverlayProps> = ({
       />
 
       {showNameSticker && (
-        <div className="absolute left-1/2 top-[61%] z-10 flex h-[11%] min-h-[25px] max-h-[38px] w-[31%] min-w-[60px] max-w-[142px] -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-[2px] border border-[#d9cfb7] bg-[#fffdf5]/95 px-1.5 py-0.5 shadow-[0_2px_7px_rgba(0,0,0,0.38)]">
+        <div
+          className={`absolute left-1/2 top-[61%] z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden border border-[#e7d19a] bg-[#f0dfb9]/95 shadow-[0_2px_7px_rgba(0,0,0,0.45)] [container-type:inline-size] ${stickerSizeClass}`}
+        >
           <span
-            className={`line-clamp-2 w-full select-none text-center font-serif font-semibold uppercase text-[#352d20] ${getStickerFontSizeClass(
-              name
-            )}`}
+            className={`w-full select-none break-words text-center font-serif font-semibold uppercase leading-tight tracking-wide text-[#352515] ${
+              compact ? 'line-clamp-2' : 'line-clamp-3'
+            }`}
+            style={{
+              fontSize: `clamp(${compact ? 5 : 7}px, ${stickerFontSize}cqw, ${compact ? 9 : 14}px)`,
+            }}
           >
             {name}
           </span>

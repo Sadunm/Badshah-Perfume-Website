@@ -1,0 +1,1 @@
+- [Perfume bottle labels](perfume-bottle-labels.md) — use the supplied bottle as the standard template and auto-fit each perfume name, including new admin products.

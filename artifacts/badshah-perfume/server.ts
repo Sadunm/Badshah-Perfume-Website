@@ -6,6 +6,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import multer from 'multer';
 import { db } from './src/server/db.ts';
+import { DEFAULT_PERFUME_BOTTLE_IMAGE_URL } from './src/types/index.ts';
 
 dotenv.config();
 
@@ -373,8 +374,8 @@ app.post('/api/admin/products', requireAdmin, (req: AuthRequest, res: Response) 
       wholesalePricePerMl,
     } = req.body;
 
-    if (!name || !image || !description) {
-      return res.status(400).json({ error: 'Product name, image, and description are required' });
+    if (!name || !description) {
+      return res.status(400).json({ error: 'Product name and description are required' });
     }
 
     if (!sizes || !Array.isArray(sizes) || sizes.length === 0) {
@@ -383,7 +384,7 @@ app.post('/api/admin/products', requireAdmin, (req: AuthRequest, res: Response) 
 
     const newProduct = db.createProduct({
       name: name.trim(),
-      image: image.trim(),
+      image: String(image || '').trim() || DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
       additionalImages: additionalImages || [],
       fragranceType: (fragranceType || 'Artisanal Perfume').trim(),
       longevity: (longevity || '10+ Hours').trim(),

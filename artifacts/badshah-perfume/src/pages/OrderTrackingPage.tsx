@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Order, OrderStatus } from '../types/index.ts';
 import { api } from '../services/api.ts';
 import { useSiteSettings } from '../context/SiteSettingsContext.tsx';
+import { BottleImageWithOverlay } from '../components/BottleImageWithOverlay.tsx';
 import {
   Search,
   Package,
@@ -283,11 +284,16 @@ export const OrderTrackingPage: React.FC<{ onExplore: () => void }> = ({ onExplo
                   className="flex items-center justify-between p-3 rounded-xl bg-[#14141a] border border-[#202028] text-xs"
                 >
                   <div className="flex items-center gap-3">
-                    <img
-                      src={item.productImage}
-                      alt={item.productName}
-                      className="w-10 h-10 rounded object-cover bg-[#1c1c24]"
-                    />
+                    <div className="w-10 h-10 shrink-0 overflow-hidden rounded bg-[#1c1c24]">
+                      <BottleImageWithOverlay
+                        image={item.productImage}
+                        name={item.productName}
+                        className="h-full w-full object-contain object-center"
+                        aspectRatio="aspect-square"
+                        showNameSticker
+                        compact
+                      />
+                    </div>
                     <div>
                       <div className="font-bold text-white">{item.productName}</div>
                       <div className="text-[11px] text-[#10b981]">

@@ -19,6 +19,7 @@ import {
   CustomRequest,
   BroadcastNotification,
   WHOLESALE_MIN_ML,
+  DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
 } from '../types/index.ts';
 import { INITIAL_PRODUCTS } from '../data/initialProducts.ts';
 import { PDF_WHOLESALE_RATES, normalizeWholesaleProductName } from '../data/wholesalePrices.ts';
@@ -146,7 +147,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   homepageVideoUrl: '',
   homepageBannerImageUrl: '',
   authBackgroundImageUrl: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&q=80&w=1200',
-  defaultBottleImageUrl: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1000',
+  defaultBottleImageUrl: DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
 };
 
 const DEFAULT_HOMEPAGE: HomepageContent = {

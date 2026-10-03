@@ -17630,9 +17630,9 @@
     }
   ],
   "homepage": {
-    "heroImage": "/uploads/rajdorber_dog_PNG_1790952457466_5197.png",
-    "heroHeading": "খাঁটি ও প্রিমিয়াম পারফিউমের অনন্য অভিজ্ঞতা",
-    "heroSubtitle": "আভিজাত্য ও রাজকীয় সুবাসের নিখুঁত সংমিশ্রণ। একবার ব্যবহারেই বুঝবেন প্রিমিয়াম কোয়ালিটির আসল পার্থক্য",
+    "heroImage": "/uploads/Badshah_Perfume_at_Sunset_1791068085145_5361.png",
+    "heroHeading": "কেন আমাদের থেকে পারফিউম কিনবেন",
+    "heroSubtitle": "কারন আমাদের প্রতিটা পারফিউমেই নিশ্চিত করা হয়  সর্বোচ্চ কোয়ালিটি  এবং যুক্তিসঙ্গত দাম । ",
     "heroButtonText": "আমাদের কালেকশন সমূহ",
     "heroButtonDestination": "#collections",
     "featuredProductIds": [],
@@ -17673,10 +17673,10 @@
     "backgroundColor": "#08080a",
     "textColor": "#ffffff",
     "accentColor": "#e0a96d",
-    "heroTitle": "খাঁটি ও প্রিমিয়াম পারফিউমের অনন্য অভিজ্ঞতা",
-    "heroSubtitle": "আভিজাত্য ও রাজকীয় সুবাসের নিখুঁত সংমিশ্রণ। একবার ব্যবহারেই বুঝবেন প্রিমিয়াম কোয়ালিটির আসল পার্থক্য",
+    "heroTitle": "কেন আমাদের থেকে পারফিউম কিনবেন",
+    "heroSubtitle": "কারন আমাদের প্রতিটা পারফিউমেই নিশ্চিত করা হয়  সর্বোচ্চ কোয়ালিটি  এবং যুক্তিসঙ্গত দাম । ",
     "heroCtaText": "আমাদের কালেকশন সমূহ",
-    "heroImageUrl": "/uploads/rajdorber_dog_PNG_1790952457466_5197.png",
+    "heroImageUrl": "/uploads/Badshah_Perfume_at_Sunset_1791068085145_5361.png",
     "announcementBarText": "সারাদেশে ক্যাশ অন ডেলিভারি | ১০০% অরিজিনাল প্রিমিয়াম সুবাসের গ্যারান্টি",
     "announcementBarEnabled": true,
     "whatsappNumber": "+8801603724942",
@@ -17721,6 +17721,6 @@
     "homepageVideoUrl": "",
     "homepageBannerImageUrl": "",
     "authBackgroundImageUrl": "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&q=80&w=1200",
-    "defaultBottleImageUrl": "https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1000"
+    "defaultBottleImageUrl": "/images/perfume-bottle-template.png"
   }
 }

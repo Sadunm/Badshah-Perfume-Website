@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { SiteSettings, WHOLESALE_MIN_ML } from '../types/index.ts';
+import {
+  DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
+  SiteSettings,
+  WHOLESALE_MIN_ML,
+} from '../types/index.ts';
 import { api } from '../services/api.ts';
 
 const FALLBACK_SETTINGS: SiteSettings = {
@@ -87,7 +91,7 @@ const FALLBACK_SETTINGS: SiteSettings = {
   homepageVideoUrl: '',
   homepageBannerImageUrl: '',
   authBackgroundImageUrl: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&q=80&w=1200',
-  defaultBottleImageUrl: 'https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&q=80&w=1000',
+  defaultBottleImageUrl: DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
 };
 
 interface SiteSettingsContextType {
