@@ -1,0 +1,6 @@
+{
+  "name": "Badshah Premium Perfume",
+  "description": "Exclusive artisanal fragrances, attar, and luxury perfumes. Handcrafted with royal Arabian and French notes. Nationwide Cash on Delivery across Bangladesh.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

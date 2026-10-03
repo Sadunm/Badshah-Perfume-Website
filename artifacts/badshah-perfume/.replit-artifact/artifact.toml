@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Badshah Premium Perfume"
+description = "The complete Badshah Premium Perfume storefront from the uploaded project, with product browsing, cart and checkout, order tracking, wholesale information, customer accounts, and its administration pages."
+version = "1.0.0"
+id = "artifacts/badshah-perfume"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24713
+
+[services.development]
+run = "pnpm --filter @workspace/badshah-perfume run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/badshah-perfume", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/badshah-perfume/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24713"
+BASE_PATH = "/"

@@ -1,0 +1,2418 @@
+{
+  "perfumes": [
+    {
+      "name": "9PM Afnan",
+      "notes": [
+        "Apple",
+        "cinnamon",
+        "wild lavender",
+        "bergamot",
+        "orange blossom",
+        "lily-of-the-valley",
+        "vanilla",
+        "tonka",
+        "amber",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "Absolu Armani",
+      "notes": [
+        "green mandarin",
+        "apple",
+        "nutmeg",
+        "orange blossom",
+        "carrot seed",
+        "vanilla",
+        "tonka",
+        "suede",
+        "woods"
+      ]
+    },
+    {
+      "name": "Acua De Profumo",
+      "notes": []
+    },
+    {
+      "name": "Adidas",
+      "notes": [
+        "Cotton candy",
+        "Nutmeg",
+        "Coriander",
+        "Blue Curacao",
+        "Licorice",
+        "Mint",
+        "Lemon",
+        "Vanilla",
+        "Vetiver",
+        "Woody notes"
+      ]
+    },
+    {
+      "name": "Afshan",
+      "notes": [
+        "floral notes",
+        "saffron",
+        "green notes",
+        "ylang-ylang",
+        "rose",
+        "spices",
+        "musk",
+        "amber",
+        "woods",
+        "cedar"
+      ]
+    },
+    {
+      "name": "Ahmed Al Magribi Marj Super",
+      "notes": [
+        "oud",
+        "honey",
+        "elemi",
+        "pink pepper",
+        "nutmeg",
+        "bergamot",
+        "mandarin",
+        "saffron",
+        "leather",
+        "amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Ahsas Al Arabia",
+      "notes": []
+    },
+    {
+      "name": "Ajmal Blue",
+      "notes": [
+        "watermelon",
+        "lavender",
+        "bergamot",
+        "lotus",
+        "jasmine",
+        "musk",
+        "sandalwood",
+        "amber"
+      ]
+    },
+    {
+      "name": "Ajmal Misk Rumman",
+      "notes": []
+    },
+    {
+      "name": "Al Fares",
+      "notes": [
+        "musk",
+        "basil",
+        "amber",
+        "fruits",
+        "lily-of-the-valley",
+        "jasmine",
+        "citrus",
+        "coriander",
+        "lavender",
+        "sage",
+        "orange blossom",
+        "sandalwood"
+      ]
+    },
+    {
+      "name": "Al Hamd",
+      "notes": []
+    },
+    {
+      "name": "Al Rehab Sharquiah",
+      "notes": [
+        "agarwood (oud)",
+        "dates",
+        "incense",
+        "rose",
+        "floral notes",
+        "vanilla",
+        "citruses"
+      ]
+    },
+    {
+      "name": "Al Zubra",
+      "notes": []
+    },
+    {
+      "name": "Alf Zahra",
+      "notes": [
+        "floral notes",
+        "myrrh",
+        "incense",
+        "sandalwood",
+        "amber",
+        "musk",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "Alisha",
+      "notes": []
+    },
+    {
+      "name": "Amber Aoud",
+      "notes": [
+        "bergamot",
+        "lemon",
+        "lime",
+        "rose",
+        "fig",
+        "ylang-ylang",
+        "jasmine",
+        "oud",
+        "ambergris",
+        "saffron",
+        "sandalwood",
+        "musk",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "Amber Noir",
+      "notes": []
+    },
+    {
+      "name": "Amberwood Ajmal",
+      "notes": [
+        "amberwood",
+        "woods",
+        "amber",
+        "soft musk (exact oil blend may vary)"
+      ]
+    },
+    {
+      "name": "Ameer Al Oud",
+      "notes": [
+        "Oriental spices",
+        "Saffron",
+        "Myrrh",
+        "Raspberry",
+        "Sandalwood",
+        "Woody notes",
+        "Jasmine",
+        "Lilac",
+        "Carnation",
+        "Musk",
+        "Cedarwood",
+        "Ambergris",
+        "Sweet vanilla"
+      ]
+    },
+    {
+      "name": "Aqua 121",
+      "notes": []
+    },
+    {
+      "name": "Arabian White Oud",
+      "notes": [
+        "white oud",
+        "clean woods",
+        "musk",
+        "soft amber"
+      ]
+    },
+    {
+      "name": "Armani Black Code",
+      "notes": [
+        "lemon",
+        "bergamot",
+        "star anise",
+        "olive blossom",
+        "guaiac wood",
+        "leather",
+        "tonka bean",
+        "tobacco"
+      ]
+    },
+    {
+      "name": "Armani Code",
+      "notes": [
+        "lemon",
+        "bergamot",
+        "star anise",
+        "olive blossom",
+        "guaiac wood",
+        "leather",
+        "tonka",
+        "tobacco"
+      ]
+    },
+    {
+      "name": "Armani Stronger With You",
+      "notes": [
+        "chestnut",
+        "cardamom",
+        "sage",
+        "lavender",
+        "vanilla",
+        "smoke"
+      ]
+    },
+    {
+      "name": "Aro Magnet",
+      "notes": []
+    },
+    {
+      "name": "Aroosha",
+      "notes": []
+    },
+    {
+      "name": "Aseel",
+      "notes": [
+        "bergamot",
+        "lemon",
+        "clary sage",
+        "pineapple",
+        "rose",
+        "violet",
+        "lily",
+        "jasmine",
+        "amber",
+        "sandalwood",
+        "cedar",
+        "musk",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "Atomick Oud",
+      "notes": []
+    },
+    {
+      "name": "Attar Full",
+      "notes": [
+        "jasmine",
+        "ylang-ylang",
+        "orange blossom",
+        "musk"
+      ]
+    },
+    {
+      "name": "Axe",
+      "notes": []
+    },
+    {
+      "name": "Axe Chocolate",
+      "notes": []
+    },
+    {
+      "name": "Azzaro Wanted",
+      "notes": [
+        "lemon",
+        "ginger",
+        "lavender",
+        "mint",
+        "apple",
+        "cardamom",
+        "juniper",
+        "geranium",
+        "tonka",
+        "amberwood",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Baccarat Rouge",
+      "notes": [
+        "saffron",
+        "jasmine",
+        "amberwood",
+        "ambergris",
+        "Hedione",
+        "fir resin",
+        "cedar",
+        "sugar",
+        "Ambroxan",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "Badee Al Oud Published profile; line name may refer to the Lattafa oil inspiration",
+      "notes": [
+        "oud",
+        "saffron",
+        "leather",
+        "spices",
+        "caramel",
+        "vanilla",
+        "amber"
+      ]
+    },
+    {
+      "name": "Badee Al Oud Premium Variant name is supplier-specific; confirm exact edition",
+      "notes": [
+        "oud",
+        "saffron/spices",
+        "leather",
+        "amber",
+        "vanilla",
+        "woods"
+      ]
+    },
+    {
+      "name": "Bakhour",
+      "notes": [
+        "Floral notes",
+        "Fruity notes",
+        "Vanilla",
+        "Amber",
+        "Woody notes"
+      ]
+    },
+    {
+      "name": "Barbara",
+      "notes": []
+    },
+    {
+      "name": "Beautiful Touch",
+      "notes": []
+    },
+    {
+      "name": "Best",
+      "notes": []
+    },
+    {
+      "name": "Black Heart",
+      "notes": []
+    },
+    {
+      "name": "Black Oud",
+      "notes": []
+    },
+    {
+      "name": "Blue De Chanel",
+      "notes": [
+        "grapefruit",
+        "lemon",
+        "mint",
+        "pink pepper",
+        "ginger",
+        "nutmeg",
+        "jasmine",
+        "Iso E Super",
+        "incense",
+        "vetiver",
+        "cedar",
+        "sandalwood",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "Blue Desire",
+      "notes": []
+    },
+    {
+      "name": "Blue Lady",
+      "notes": [
+        "tuberose",
+        "ylang-ylang",
+        "orange flower",
+        "violet leaf",
+        "jasmine",
+        "plum",
+        "narcissus",
+        "peach",
+        "sandalwood",
+        "vanilla",
+        "amber",
+        "musk",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Blue Lomani",
+      "notes": []
+    },
+    {
+      "name": "Blue Wave",
+      "notes": []
+    },
+    {
+      "name": "Bukhari Oud",
+      "notes": []
+    },
+    {
+      "name": "Bulgari Man",
+      "notes": [
+        "bergamot",
+        "violet leaf",
+        "lotus",
+        "vetiver",
+        "cypriol",
+        "white woods",
+        "sandalwood",
+        "cashmere wood",
+        "benzoin",
+        "musk"
+      ]
+    },
+    {
+      "name": "Burberry Goddess",
+      "notes": [
+        "vanilla",
+        "lavender",
+        "cacao",
+        "ginger",
+        "vanilla caviar",
+        "vanilla absolute"
+      ]
+    },
+    {
+      "name": "Bushra",
+      "notes": []
+    },
+    {
+      "name": "Candy Aoud",
+      "notes": [
+        "grapefruit",
+        "bergamot",
+        "banana",
+        "pear",
+        "apple",
+        "black currant",
+        "rose",
+        "oud",
+        "leather",
+        "birch",
+        "amber",
+        "saffron",
+        "patchouli",
+        "musk",
+        "woods"
+      ]
+    },
+    {
+      "name": "Caramel Oud",
+      "notes": []
+    },
+    {
+      "name": "Ch 212 Men",
+      "notes": [
+        "green notes",
+        "grapefruit",
+        "bergamot",
+        "spices",
+        "lavender",
+        "petitgrain",
+        "ginger",
+        "violet",
+        "gardenia",
+        "sage",
+        "musk",
+        "sandalwood",
+        "incense",
+        "vetiver",
+        "guaiac wood"
+      ]
+    },
+    {
+      "name": "Chairman",
+      "notes": []
+    },
+    {
+      "name": "Chameli Full",
+      "notes": []
+    },
+    {
+      "name": "Chanel No 5 Published profile; formulation varies by version/year",
+      "notes": [
+        "aldehydes",
+        "ylang-ylang",
+        "neroli",
+        "rose",
+        "iris",
+        "jasmine",
+        "sandalwood",
+        "musk",
+        "vanilla"
+      ]
+    },
+    {
+      "name": "Chelsea",
+      "notes": []
+    },
+    {
+      "name": "Chocolate Musk",
+      "notes": []
+    },
+    {
+      "name": "Chocolate Venilla",
+      "notes": []
+    },
+    {
+      "name": "Cinema Lcv",
+      "notes": []
+    },
+    {
+      "name": "Ck-1",
+      "notes": [
+        "lemon",
+        "bergamot",
+        "mandarin",
+        "pineapple",
+        "cardamom",
+        "lily-of-the-valley",
+        "jasmine",
+        "violet",
+        "nutmeg",
+        "green tea",
+        "musk",
+        "cedar",
+        "sandalwood",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "Classic",
+      "notes": []
+    },
+    {
+      "name": "Cool Blue",
+      "notes": []
+    },
+    {
+      "name": "Cool Water (W)",
+      "notes": []
+    },
+    {
+      "name": "Cool Water Man",
+      "notes": [
+        "mint",
+        "lavender",
+        "rosemary",
+        "sea water",
+        "geranium",
+        "sandalwood",
+        "cedar",
+        "musk",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "CR7 Published fragrance profile for CR7",
+      "notes": [
+        "bergamot",
+        "lavender",
+        "cinnamon",
+        "tobacco",
+        "amber",
+        "vanilla",
+        "musk"
+      ]
+    },
+    {
+      "name": "Creed Aventus",
+      "notes": [
+        "pineapple",
+        "blackcurrant",
+        "bergamot",
+        "apple",
+        "birch",
+        "patchouli",
+        "jasmine",
+        "rose",
+        "musk",
+        "oakmoss",
+        "ambergris",
+        "vanilla"
+      ]
+    },
+    {
+      "name": "Creed Viking",
+      "notes": [
+        "bergamot",
+        "lemon",
+        "pink pepper",
+        "mint",
+        "rose",
+        "orris",
+        "sandalwood",
+        "vetiver",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "D'Love",
+      "notes": [
+        "pink pepper",
+        "African orange flower",
+        "iris",
+        "lilac",
+        "hyacinth",
+        "heliotrope",
+        "wisteria",
+        "powdery notes",
+        "rice",
+        "musk"
+      ]
+    },
+    {
+      "name": "D&g; Light Blue (M)",
+      "notes": []
+    },
+    {
+      "name": "Dalal",
+      "notes": [
+        "caramel",
+        "vanilla",
+        "orange",
+        "sandalwood"
+      ]
+    },
+    {
+      "name": "Darbar",
+      "notes": []
+    },
+    {
+      "name": "Dareej Verified",
+      "notes": [
+        "cumin",
+        "cardamom",
+        "artemisia",
+        "rose",
+        "orris root",
+        "vanilla",
+        "tonka bean",
+        "amber",
+        "sandalwood",
+        "patchouli",
+        "musk"
+      ]
+    },
+    {
+      "name": "Dark Oud",
+      "notes": []
+    },
+    {
+      "name": "David Beckham",
+      "notes": [
+        "Sichuan pepper",
+        "Ginger",
+        "Citrus",
+        "Cashmere wood",
+        "Leather",
+        "Rosemary",
+        "Mahogany",
+        "Musk",
+        "Patchouli"
+      ]
+    },
+    {
+      "name": "Dehnal Oud",
+      "notes": []
+    },
+    {
+      "name": "Dior Jadore Published profile; formulation varies",
+      "notes": [
+        "ylang-ylang",
+        "jasmine",
+        "rose",
+        "pear",
+        "bergamot",
+        "tuberose",
+        "plum",
+        "vanilla",
+        "musk",
+        "woods"
+      ]
+    },
+    {
+      "name": "Dior Sauvage",
+      "notes": [
+        "Calabrian bergamot",
+        "pepper",
+        "Sichuan pepper",
+        "lavender",
+        "pink pepper",
+        "vetiver",
+        "patchouli",
+        "geranium",
+        "elemi",
+        "Ambroxan",
+        "cedar",
+        "labdanum"
+      ]
+    },
+    {
+      "name": "Diptyque Tam Dao SPI Published profile family; exact concentration should be confirmed",
+      "notes": [
+        "sandalwood",
+        "cedar",
+        "cypress",
+        "myrtle",
+        "white musk"
+      ]
+    },
+    {
+      "name": "Diptyque Tam Dao Super Variant-specific source name; profile based on Tam Dao family",
+      "notes": [
+        "sandalwood",
+        "cedar",
+        "cypress",
+        "myrtle",
+        "musks"
+      ]
+    },
+    {
+      "name": "Dirham",
+      "notes": [
+        "citrus",
+        "lavender",
+        "cardamom",
+        "jasmine",
+        "rose",
+        "vetiver",
+        "sandalwood",
+        "vanilla",
+        "musk"
+      ]
+    },
+    {
+      "name": "Dubai Gold",
+      "notes": []
+    },
+    {
+      "name": "Dunhill Desire Blue",
+      "notes": [
+        "apple",
+        "bergamot",
+        "orange",
+        "lotus",
+        "rosewood",
+        "teak",
+        "amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Dunhill Desire Red",
+      "notes": [
+        "apple",
+        "cinnamon",
+        "lemon",
+        "orange blossom",
+        "neroli",
+        "rose",
+        "cardamom",
+        "vanilla",
+        "patchouli",
+        "musk"
+      ]
+    },
+    {
+      "name": "Dunhill Icon Absolute",
+      "notes": [
+        "black pepper",
+        "bergamot",
+        "saffron",
+        "black rose",
+        "jasmine",
+        "oud",
+        "leather",
+        "tobacco leaf"
+      ]
+    },
+    {
+      "name": "Dunhill Icon Grey",
+      "notes": [
+        "grapefruit",
+        "bergamot",
+        "neroli",
+        "cardamom",
+        "black pepper",
+        "lavender",
+        "orris",
+        "vetiver",
+        "oakmoss",
+        "sandalwood"
+      ]
+    },
+    {
+      "name": "Effective",
+      "notes": []
+    },
+    {
+      "name": "Emir",
+      "notes": []
+    },
+    {
+      "name": "Escada Moon Sparkle",
+      "notes": [
+        "strawberry",
+        "blackcurrant",
+        "red apple",
+        "citrus",
+        "sweet pea",
+        "freesia",
+        "jasmine",
+        "rose",
+        "raspberry",
+        "musk",
+        "sandalwood",
+        "amber"
+      ]
+    },
+    {
+      "name": "Escada Sorbetto Rosso",
+      "notes": [
+        "pear",
+        "calone",
+        "tangerine",
+        "watermelon",
+        "watery notes",
+        "strawberry",
+        "apple",
+        "sea salt",
+        "tiare",
+        "rose",
+        "praline",
+        "musk",
+        "amber"
+      ]
+    },
+    {
+      "name": "Escape",
+      "notes": [
+        "melon",
+        "eucalyptus",
+        "apple",
+        "plum",
+        "chamomile",
+        "peach",
+        "lily-of-the-valley",
+        "musk",
+        "sandalwood",
+        "amber"
+      ]
+    },
+    {
+      "name": "Fanky Boquet",
+      "notes": []
+    },
+    {
+      "name": "Fantasia",
+      "notes": []
+    },
+    {
+      "name": "Faraz",
+      "notes": []
+    },
+    {
+      "name": "Fawakey (Surrati)",
+      "notes": []
+    },
+    {
+      "name": "Gissah Imperial Valley",
+      "notes": [
+        "Sicilian bergamot",
+        "pink pepper",
+        "davana",
+        "oud",
+        "white amber",
+        "rosemary",
+        "leather",
+        "musk",
+        "Haitian vetiver"
+      ]
+    },
+    {
+      "name": "Gissah One And Only",
+      "notes": []
+    },
+    {
+      "name": "Givenchy Interdit",
+      "notes": [
+        "orange blossom",
+        "jasmine sambac",
+        "tuberose",
+        "vetiver",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "Givency Blue Source spelling is ambiguous; likely Blue Label family",
+      "notes": [
+        "Likely style: bergamot",
+        "grapefruit/citrus",
+        "pepper",
+        "lavender",
+        "cedar",
+        "incense",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Golden Power",
+      "notes": []
+    },
+    {
+      "name": "Good Girl",
+      "notes": [
+        "almond",
+        "coffee",
+        "bergamot",
+        "lemon",
+        "tuberose",
+        "jasmine",
+        "orris",
+        "orange blossom",
+        "rose",
+        "tonka",
+        "cacao",
+        "vanilla",
+        "praline",
+        "sandalwood",
+        "amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Green Mango",
+      "notes": []
+    },
+    {
+      "name": "Gucci Bloom",
+      "notes": [
+        "tuberose",
+        "jasmine",
+        "honeysuckle",
+        "orris/soft woods depending on version"
+      ]
+    },
+    {
+      "name": "Gucci Flora",
+      "notes": [
+        "citrus",
+        "peony",
+        "rose",
+        "osmanthus",
+        "patchouli",
+        "sandalwood"
+      ]
+    },
+    {
+      "name": "Gucci Guilty",
+      "notes": [
+        "pink pepper",
+        "mandarin orange",
+        "bergamot",
+        "lilac",
+        "peach",
+        "geranium",
+        "jasmine",
+        "black currant",
+        "patchouli",
+        "amber",
+        "white musk",
+        "vanilla"
+      ]
+    },
+    {
+      "name": "Gucci Intense Oudh Variant should be confirmed",
+      "notes": [
+        "oud",
+        "saffron",
+        "rose",
+        "pear/fruit",
+        "amber",
+        "patchouli",
+        "woods (version-dependent)"
+      ]
+    },
+    {
+      "name": "Gucci Oud",
+      "notes": [
+        "raspberry",
+        "pear",
+        "saffron",
+        "rose",
+        "oud",
+        "amber",
+        "musk",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "Gucci Paris",
+      "notes": []
+    },
+    {
+      "name": "Gule Lala",
+      "notes": []
+    },
+    {
+      "name": "Habshish",
+      "notes": []
+    },
+    {
+      "name": "Hajre Aswad",
+      "notes": []
+    },
+    {
+      "name": "Hareem Al Sultan Variant ambiguous; do not merge editions",
+      "notes": [
+        "Possible published profiles include: bergamot/rose",
+        "jasmine/amber/nutmeg",
+        "sandalwood/patchouli/oud OR red apple/dark chocolate",
+        "peony",
+        "vanilla/sandalwood"
+      ]
+    },
+    {
+      "name": "Havoc Silver",
+      "notes": []
+    },
+    {
+      "name": "Hawas Ice Lc Supplier shorthand; exact oil blend should be confirmed",
+      "notes": [
+        "citrus/fruit",
+        "aquatic accord",
+        "lavender",
+        "violet/soft florals",
+        "amberwood",
+        "musk",
+        "woods"
+      ]
+    },
+    {
+      "name": "Hawas XL",
+      "notes": []
+    },
+    {
+      "name": "Honey Oud",
+      "notes": []
+    },
+    {
+      "name": "Hudson Valley",
+      "notes": []
+    },
+    {
+      "name": "Hugo Boss",
+      "notes": [
+        "apple",
+        "plum",
+        "bergamot",
+        "lemon",
+        "cinnamon",
+        "mahogany",
+        "carnation",
+        "vanilla",
+        "sandalwood",
+        "cedar",
+        "vetiver",
+        "olive wood"
+      ]
+    },
+    {
+      "name": "Ice Blue",
+      "notes": []
+    },
+    {
+      "name": "Iceberg",
+      "notes": []
+    },
+    {
+      "name": "Infiman",
+      "notes": []
+    },
+    {
+      "name": "Infinity (W)",
+      "notes": []
+    },
+    {
+      "name": "Invictus",
+      "notes": [
+        "grapefruit",
+        "marine accord",
+        "bay leaf",
+        "jasmine",
+        "guaiac wood",
+        "patchouli",
+        "ambergris"
+      ]
+    },
+    {
+      "name": "Invictus Victory",
+      "notes": [
+        "lemon",
+        "pink pepper",
+        "olibanum",
+        "lavender",
+        "incense",
+        "patchouli",
+        "tonka bean",
+        "vanilla",
+        "amber"
+      ]
+    },
+    {
+      "name": "Jaguar Black",
+      "notes": [
+        "pink pepper",
+        "green apple",
+        "cardamom",
+        "orange blossom",
+        "geranium",
+        "sandalwood",
+        "tonka",
+        "vetiver",
+        "musk"
+      ]
+    },
+    {
+      "name": "Jannatul Ferdous",
+      "notes": []
+    },
+    {
+      "name": "Jass",
+      "notes": []
+    },
+    {
+      "name": "Jawad Al Layl",
+      "notes": []
+    },
+    {
+      "name": "Jm Oud & Bergamot",
+      "notes": []
+    },
+    {
+      "name": "Joopi Likely Joop! Homme",
+      "notes": [
+        "cinnamon",
+        "cardamom",
+        "orange blossom",
+        "jasmine",
+        "sandalwood",
+        "patchouli",
+        "vanilla",
+        "tonka",
+        "musk"
+      ]
+    },
+    {
+      "name": "Kachi Beli",
+      "notes": []
+    },
+    {
+      "name": "Kashmiri Oud",
+      "notes": [
+        "oud",
+        "amber",
+        "smoky woods",
+        "spice",
+        "musk"
+      ]
+    },
+    {
+      "name": "Kasturi",
+      "notes": []
+    },
+    {
+      "name": "Kesar Chandan",
+      "notes": [
+        "saffron/kesar",
+        "sandalwood",
+        "soft amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Khasab Al Oud",
+      "notes": [
+        "oud",
+        "saffron/spices",
+        "rose",
+        "amber",
+        "woods",
+        "musk"
+      ]
+    },
+    {
+      "name": "Kiwi",
+      "notes": []
+    },
+    {
+      "name": "KS Spark",
+      "notes": []
+    },
+    {
+      "name": "La Vie Est Belle",
+      "notes": [
+        "iris",
+        "blackcurrant",
+        "pear",
+        "jasmine",
+        "orange blossom",
+        "praline",
+        "vanilla",
+        "patchouli",
+        "tonka"
+      ]
+    },
+    {
+      "name": "Labbaik Emirates",
+      "notes": []
+    },
+    {
+      "name": "Lacost White Special",
+      "notes": [
+        "grapefruit",
+        "cardamom",
+        "rosemary",
+        "tuberose",
+        "ylang-ylang",
+        "cedar",
+        "vetiver",
+        "suede/woods"
+      ]
+    },
+    {
+      "name": "Lady Million",
+      "notes": [
+        "neroli",
+        "raspberry",
+        "bitter orange",
+        "orange blossom",
+        "jasmine",
+        "gardenia",
+        "honey",
+        "patchouli",
+        "amber"
+      ]
+    },
+    {
+      "name": "Lancome Oud",
+      "notes": []
+    },
+    {
+      "name": "Lavendar",
+      "notes": []
+    },
+    {
+      "name": "Leather and Vanilla",
+      "notes": []
+    },
+    {
+      "name": "Leril",
+      "notes": []
+    },
+    {
+      "name": "Lord",
+      "notes": []
+    },
+    {
+      "name": "Lord Blue Super",
+      "notes": []
+    },
+    {
+      "name": "Lovely",
+      "notes": [
+        "lavender",
+        "martini",
+        "bergamot",
+        "mandarin",
+        "rosewood",
+        "patchouli",
+        "orchid",
+        "narcissus",
+        "musk",
+        "cedar",
+        "white amber"
+      ]
+    },
+    {
+      "name": "Lv Ombre Nomade (Premium)",
+      "notes": [
+        "oud",
+        "raspberry",
+        "saffron",
+        "incense",
+        "rose",
+        "leather",
+        "amberwood/woods"
+      ]
+    },
+    {
+      "name": "Lv Pacific Chill",
+      "notes": [
+        "citron",
+        "blackcurrant",
+        "orange",
+        "apricot",
+        "basil",
+        "mint",
+        "coriander",
+        "ambrette/musks"
+      ]
+    },
+    {
+      "name": "Lychee",
+      "notes": []
+    },
+    {
+      "name": "Madawi Published profile family;",
+      "notes": [
+        "peach",
+        "apple",
+        "pineapple/plum nuances",
+        "florals",
+        "musk",
+        "amber",
+        "vanilla"
+      ]
+    },
+    {
+      "name": "Madina (Al Haramain)",
+      "notes": []
+    },
+    {
+      "name": "Magnate-Asma",
+      "notes": []
+    },
+    {
+      "name": "Mahir Black",
+      "notes": [
+        "saffron",
+        "black pepper",
+        "lavender",
+        "black rose",
+        "jasmine",
+        "oud",
+        "amberwood",
+        "musk",
+        "oakmoss",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "Makhmaria",
+      "notes": []
+    },
+    {
+      "name": "Mancera Red Tobacco",
+      "notes": [
+        "cinnamon",
+        "oud",
+        "saffron",
+        "incense",
+        "nutmeg",
+        "green apple",
+        "pear",
+        "patchouli",
+        "jasmine",
+        "tobacco",
+        "vanilla",
+        "amber",
+        "sandalwood",
+        "guaiac wood",
+        "musk",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Maxi",
+      "notes": []
+    },
+    {
+      "name": "Memo Irsh Leather",
+      "notes": [
+        "galbanum",
+        "pink pepper",
+        "juniper",
+        "green pepper",
+        "sage",
+        "iris",
+        "leather",
+        "tonka",
+        "cedar",
+        "olibanum",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Mukhallat Badar Lc",
+      "notes": []
+    },
+    {
+      "name": "Mukhallat Hind",
+      "notes": []
+    },
+    {
+      "name": "Mukhallat Madina",
+      "notes": []
+    },
+    {
+      "name": "Mukhallat Oud",
+      "notes": []
+    },
+    {
+      "name": "Musk Al Tahara Blue Color variants are supplier-specific; exact formula should be confirmed",
+      "notes": [
+        "clean musk",
+        "soft florals",
+        "powder",
+        "fresh/soapy accents"
+      ]
+    },
+    {
+      "name": "Musk Al Tahara Brown Supplier-specific color variant",
+      "notes": [
+        "clean musk",
+        "powder",
+        "soft amber",
+        "light woods"
+      ]
+    },
+    {
+      "name": "Musk Al Tahara Green Supplier-specific color variant",
+      "notes": [
+        "clean musk",
+        "green notes",
+        "fresh florals",
+        "soft woods"
+      ]
+    },
+    {
+      "name": "Musk Al Tahara Pink Supplier-specific color variant",
+      "notes": [
+        "clean musk",
+        "rose/floral nuances",
+        "powder",
+        "soft vanilla"
+      ]
+    },
+    {
+      "name": "Musk Al Tahara Purple Supplier-specific color variant",
+      "notes": [
+        "clean musk",
+        "violet/floral nuances",
+        "powder",
+        "soft amber"
+      ]
+    },
+    {
+      "name": "Musk Al Tahara White Supplier-specific color variant",
+      "notes": [
+        "white musk",
+        "powder",
+        "clean florals",
+        "soft woods"
+      ]
+    },
+    {
+      "name": "Musk Al Tahara Yellow Supplier-specific color variant",
+      "notes": [
+        "musk",
+        "soft florals",
+        "gentle sweetness",
+        "amber nuances"
+      ]
+    },
+    {
+      "name": "Musk Fakher",
+      "notes": []
+    },
+    {
+      "name": "Musk Makkah",
+      "notes": []
+    },
+    {
+      "name": "Musk Rejaly",
+      "notes": []
+    },
+    {
+      "name": "Musk Sapphire",
+      "notes": []
+    },
+    {
+      "name": "Nazneen",
+      "notes": []
+    },
+    {
+      "name": "Neem",
+      "notes": []
+    },
+    {
+      "name": "Nevia",
+      "notes": []
+    },
+    {
+      "name": "Nevia V2",
+      "notes": []
+    },
+    {
+      "name": "Noir Oud",
+      "notes": []
+    },
+    {
+      "name": "Noora",
+      "notes": []
+    },
+    {
+      "name": "Omber Leather",
+      "notes": []
+    },
+    {
+      "name": "One Man Show",
+      "notes": [
+        "kumquat",
+        "basil",
+        "bergamot",
+        "rosemary",
+        "jasmine",
+        "rose",
+        "geranium",
+        "patchouli",
+        "leather",
+        "sandalwood",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "One Million",
+      "notes": [
+        "grapefruit",
+        "blood mandarin",
+        "mint",
+        "cinnamon",
+        "rose",
+        "leather",
+        "white woods",
+        "amber",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "One Million Elixir",
+      "notes": [
+        "apple",
+        "davana",
+        "damask rose",
+        "tonka bean",
+        "vanilla",
+        "cedar",
+        "patchouli"
+      ]
+    },
+    {
+      "name": "One Million Lucky",
+      "notes": [
+        "plum",
+        "grapefruit",
+        "ozonic notes",
+        "hazelnut",
+        "honey",
+        "orange blossom",
+        "cedar",
+        "cashmere wood",
+        "patchouli",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Open V2",
+      "notes": []
+    },
+    {
+      "name": "Orange",
+      "notes": []
+    },
+    {
+      "name": "Oud Al Fursan",
+      "notes": [
+        "pineapple",
+        "saffron",
+        "jasmine",
+        "amber/balsamic notes",
+        "woods",
+        "oud"
+      ]
+    },
+    {
+      "name": "Oud India",
+      "notes": []
+    },
+    {
+      "name": "Oud Kerala",
+      "notes": []
+    },
+    {
+      "name": "Oud Mood",
+      "notes": [
+        "saffron",
+        "nutmeg",
+        "pimento",
+        "caramel",
+        "patchouli",
+        "rose",
+        "vanilla",
+        "amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Oud Pk Xx",
+      "notes": []
+    },
+    {
+      "name": "Oud Sultani",
+      "notes": []
+    },
+    {
+      "name": "Paradise",
+      "notes": []
+    },
+    {
+      "name": "Paris Hilton",
+      "notes": [
+        "peach",
+        "apple",
+        "freesia",
+        "mimosa",
+        "lily-of-the-valley",
+        "jasmine",
+        "tuberose",
+        "sandalwood",
+        "musk"
+      ]
+    },
+    {
+      "name": "Pdm Delina Exclusif",
+      "notes": [
+        "litchi",
+        "pear",
+        "bergamot",
+        "Turkish rose",
+        "oud",
+        "incense",
+        "vanilla",
+        "amber",
+        "woody notes"
+      ]
+    },
+    {
+      "name": "Pink Chiffon",
+      "notes": []
+    },
+    {
+      "name": "Pink President",
+      "notes": []
+    },
+    {
+      "name": "Polo Blue",
+      "notes": [
+        "melon",
+        "cucumber",
+        "mandarin",
+        "basil",
+        "sage",
+        "geranium",
+        "musk",
+        "woods",
+        "amber"
+      ]
+    },
+    {
+      "name": "Polo Sport",
+      "notes": [
+        "mandarin",
+        "bergamot",
+        "aldehydes",
+        "mint",
+        "ginger",
+        "lavender",
+        "rosewood",
+        "sea grass",
+        "musk",
+        "sandalwood",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "Pomegrante Musk",
+      "notes": []
+    },
+    {
+      "name": "Ponds",
+      "notes": []
+    },
+    {
+      "name": "Purple Oud",
+      "notes": []
+    },
+    {
+      "name": "Qaeed Al Fursan",
+      "notes": []
+    },
+    {
+      "name": "Qamar Al Layl",
+      "notes": []
+    },
+    {
+      "name": "Rajnigandha (Keva)",
+      "notes": []
+    },
+    {
+      "name": "Rajnigandha (S)",
+      "notes": []
+    },
+    {
+      "name": "Rasasi Hawas Ice",
+      "notes": [
+        "citrus fruit",
+        "aquatic accord",
+        "lavender",
+        "violet/plum facets",
+        "amberwood",
+        "musk",
+        "woods"
+      ]
+    },
+    {
+      "name": "Rasasi Royal Blue",
+      "notes": [
+        "Sea notes",
+        "Bergamot",
+        "Melon",
+        "Galbanum",
+        "Lavender",
+        "Violet",
+        "Jasmine",
+        "Rose",
+        "Musk",
+        "Sandalwood",
+        "Cedar",
+        "Amber",
+        "Patchouli"
+      ]
+    },
+    {
+      "name": "Rasha",
+      "notes": []
+    },
+    {
+      "name": "Rasiq",
+      "notes": []
+    },
+    {
+      "name": "Rawadha Saudi",
+      "notes": []
+    },
+    {
+      "name": "Real Rose",
+      "notes": []
+    },
+    {
+      "name": "Red Door",
+      "notes": [
+        "red rose",
+        "violet",
+        "ylang-ylang",
+        "orange blossom",
+        "plum",
+        "peach",
+        "jasmine",
+        "honey",
+        "sandalwood",
+        "amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Red Rose",
+      "notes": [
+        "Bulgarian/Turkish rose",
+        "lemon",
+        "honeycomb",
+        "violet leaf",
+        "seaweed/green nuances"
+      ]
+    },
+    {
+      "name": "Red Strawberry",
+      "notes": []
+    },
+    {
+      "name": "Romance",
+      "notes": [
+        "rose",
+        "chamomile",
+        "freesia",
+        "ginger",
+        "lily",
+        "lotus",
+        "violet",
+        "carnation",
+        "musk",
+        "patchouli",
+        "oakmoss",
+        "woods"
+      ]
+    },
+    {
+      "name": "Rose Isparta",
+      "notes": []
+    },
+    {
+      "name": "Rose Musk",
+      "notes": []
+    },
+    {
+      "name": "Royal Bakhour",
+      "notes": []
+    },
+    {
+      "name": "Royal Mirage",
+      "notes": []
+    },
+    {
+      "name": "Royal Power",
+      "notes": []
+    },
+    {
+      "name": "Royal Prophecy",
+      "notes": []
+    },
+    {
+      "name": "Sabaya",
+      "notes": []
+    },
+    {
+      "name": "Sadaf",
+      "notes": []
+    },
+    {
+      "name": "Salma",
+      "notes": []
+    },
+    {
+      "name": "Salma Basha",
+      "notes": []
+    },
+    {
+      "name": "Salma- Saudi",
+      "notes": []
+    },
+    {
+      "name": "Salted Caramel",
+      "notes": []
+    },
+    {
+      "name": "Sandal -BT",
+      "notes": []
+    },
+    {
+      "name": "Sandal Rose",
+      "notes": []
+    },
+    {
+      "name": "Sandaliyah 5 Star",
+      "notes": []
+    },
+    {
+      "name": "Sautul Arab",
+      "notes": []
+    },
+    {
+      "name": "Shadha",
+      "notes": []
+    },
+    {
+      "name": "Shaikhah",
+      "notes": []
+    },
+    {
+      "name": "Shamama",
+      "notes": []
+    },
+    {
+      "name": "Shuhrah",
+      "notes": []
+    },
+    {
+      "name": "SRK",
+      "notes": []
+    },
+    {
+      "name": "Silver",
+      "notes": []
+    },
+    {
+      "name": "So Oud",
+      "notes": []
+    },
+    {
+      "name": "Soft",
+      "notes": [
+        "citruses",
+        "vanilla",
+        "caramel",
+        "white musk",
+        "orchid",
+        "jasmine",
+        "woods",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Spice Bomb Extreme",
+      "notes": [
+        "black pepper",
+        "caraway",
+        "lavender",
+        "cinnamon",
+        "saffron",
+        "tobacco",
+        "vanilla",
+        "amber"
+      ]
+    },
+    {
+      "name": "Strawberry",
+      "notes": []
+    },
+    {
+      "name": "Stronger With You",
+      "notes": [
+        "cardamom",
+        "pink pepper",
+        "mint",
+        "violet leaf",
+        "pineapple",
+        "sage",
+        "melon",
+        "cinnamon",
+        "lavender",
+        "vanilla",
+        "chestnut",
+        "cedar",
+        "amberwood",
+        "guaiac wood"
+      ]
+    },
+    {
+      "name": "Sukkar Banat",
+      "notes": []
+    },
+    {
+      "name": "Sultan",
+      "notes": []
+    },
+    {
+      "name": "Sweet Magnum",
+      "notes": []
+    },
+    {
+      "name": "Sweet Rose",
+      "notes": []
+    },
+    {
+      "name": "Swiss Jannatul Ferdous",
+      "notes": []
+    },
+    {
+      "name": "Taj Mahal",
+      "notes": []
+    },
+    {
+      "name": "Tea Rose",
+      "notes": [
+        "rose",
+        "lemon",
+        "linden",
+        "carnation",
+        "tuberose",
+        "lilac",
+        "musk",
+        "sandalwood"
+      ]
+    },
+    {
+      "name": "Terre De Hermes",
+      "notes": [
+        "orange",
+        "grapefruit",
+        "pepper",
+        "flint",
+        "cedar",
+        "patchouli",
+        "vetiver",
+        "benzoin"
+      ]
+    },
+    {
+      "name": "Tom Ford Noir Published profile family; exact version should be confirmed",
+      "notes": [
+        "bergamot",
+        "mandarin",
+        "ginger",
+        "rose",
+        "jasmine",
+        "orange blossom",
+        "nutmeg",
+        "vanilla",
+        "amber",
+        "leather",
+        "patchouli",
+        "sandalwood"
+      ]
+    },
+    {
+      "name": "Tom Ford Omber Leather",
+      "notes": [
+        "cardamom",
+        "jasmine sambac",
+        "leather",
+        "patchouli",
+        "amber",
+        "moss"
+      ]
+    },
+    {
+      "name": "Tom Ford Oud Wood",
+      "notes": [
+        "rosewood",
+        "cardamom",
+        "pepper",
+        "oud",
+        "sandalwood",
+        "vetiver",
+        "tonka",
+        "vanilla",
+        "amber"
+      ]
+    },
+    {
+      "name": "Tom Ford Tobacco Vanilla",
+      "notes": [
+        "tobacco leaf",
+        "spicy accords",
+        "vanilla",
+        "cacao",
+        "tonka bean",
+        "dried fruits",
+        "woods"
+      ]
+    },
+    {
+      "name": "Tom Ford Tuscan Leather",
+      "notes": [
+        "raspberry",
+        "saffron",
+        "thyme",
+        "olibanum",
+        "jasmine",
+        "leather",
+        "suede",
+        "woody notes",
+        "amber"
+      ]
+    },
+    {
+      "name": "Tom Ford Vanilla Sex Exact formulation/version should be confirmed",
+      "notes": [
+        "vanilla",
+        "almond/nutty facets",
+        "sandalwood",
+        "amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Tommy Girl",
+      "notes": [
+        "apple",
+        "cassis",
+        "mandarin",
+        "lemon",
+        "honeysuckle",
+        "mint",
+        "rose",
+        "lily",
+        "violet",
+        "musk",
+        "sandalwood",
+        "amber"
+      ]
+    },
+    {
+      "name": "V& R Spicebomb",
+      "notes": []
+    },
+    {
+      "name": "Valentino Uomo Intense",
+      "notes": [
+        "mandarin",
+        "clary sage",
+        "iris",
+        "tonka bean",
+        "leather",
+        "vanilla"
+      ]
+    },
+    {
+      "name": "Vampire Blood",
+      "notes": [
+        "red fruits",
+        "dark florals",
+        "sweet amber",
+        "musk"
+      ]
+    },
+    {
+      "name": "Vampire Blood Spl",
+      "notes": []
+    },
+    {
+      "name": "Versace Eros",
+      "notes": [
+        "mint",
+        "lemon",
+        "green apple",
+        "tonka",
+        "ambroxan",
+        "geranium",
+        "vanilla",
+        "cedar",
+        "oakmoss",
+        "vetiver"
+      ]
+    },
+    {
+      "name": "Vickey",
+      "notes": []
+    },
+    {
+      "name": "Victoria Secret Beach Flower Pink",
+      "notes": []
+    },
+    {
+      "name": "Victoria Secret Bombshell",
+      "notes": [
+        "passionfruit",
+        "grapefruit",
+        "pineapple",
+        "tangerine",
+        "strawberry",
+        "peony",
+        "vanilla orchid",
+        "red berries",
+        "jasmine",
+        "lily-of-the-valley",
+        "musk",
+        "woods",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "Victoria Secret Bombshell Oud",
+      "notes": []
+    },
+    {
+      "name": "Victoria Secret Pure Seduction Published profile family; exact concentration/edition should be confirmed",
+      "notes": [
+        "red plum",
+        "freesia",
+        "fruity sweetness",
+        "floral notes",
+        "soft musk"
+      ]
+    },
+    {
+      "name": "Victoria Secret Wild Flowers",
+      "notes": []
+    },
+    {
+      "name": "Watermelon",
+      "notes": []
+    },
+    {
+      "name": "White London",
+      "notes": []
+    },
+    {
+      "name": "White Oud M25 Series",
+      "notes": []
+    },
+    {
+      "name": "White Oud Special",
+      "notes": []
+    },
+    {
+      "name": "White Shamama Spl",
+      "notes": []
+    },
+    {
+      "name": "White Shamama Ga",
+      "notes": []
+    },
+    {
+      "name": "Wild Berries",
+      "notes": []
+    },
+    {
+      "name": "X-Original",
+      "notes": []
+    },
+    {
+      "name": "Yara Candy Published profile family; exact edition should be confirmed",
+      "notes": [
+        "strawberry",
+        "green mandarin",
+        "black currant",
+        "peony/gardenia",
+        "vanilla",
+        "musk",
+        "sandalwood",
+        "amber"
+      ]
+    },
+    {
+      "name": "YSL Black Opium",
+      "notes": [
+        "pear",
+        "pink pepper",
+        "orange blossom",
+        "coffee",
+        "jasmine",
+        "bitter almond",
+        "licorice",
+        "vanilla",
+        "patchouli",
+        "cedar",
+        "cashmere wood"
+      ]
+    },
+    {
+      "name": "Zahoor Al Madina-Saudi",
+      "notes": []
+    },
+    {
+      "name": "Zam Zam",
+      "notes": []
+    },
+    {
+      "name": "Zatax",
+      "notes": []
+    },
+    {
+      "name": "Al Harmain Opposite",
+      "notes": []
+    },
+    {
+      "name": "Bondage Hommee",
+      "notes": []
+    },
+    {
+      "name": "Love In Franch",
+      "notes": []
+    },
+    {
+      "name": "Lafatta Eclear",
+      "notes": []
+    },
+    {
+      "name": "Lafatta Khamrah Qahwa",
+      "notes": [
+        "cinnamon",
+        "cardamom",
+        "ginger",
+        "praline",
+        "candied fruits",
+        "white flowers",
+        "coffee",
+        "vanilla",
+        "tonka",
+        "musk",
+        "benzoin"
+      ]
+    },
+    {
+      "name": "Imagination",
+      "notes": [
+        "citron",
+        "bergamot",
+        "Sicilian orange",
+        "neroli",
+        "ginger",
+        "Ceylon cinnamon",
+        "black tea",
+        "Ambroxan",
+        "guaiac wood",
+        "olibanum"
+      ]
+    },
+    {
+      "name": "Ehas Al Arabia",
+      "notes": []
+    },
+    {
+      "name": "Dehnal OUDH",
+      "notes": []
+    },
+    {
+      "name": "Nexos",
+      "notes": []
+    },
+    {
+      "name": "Aqua De Gio",
+      "notes": [
+        "marine notes",
+        "bergamot",
+        "lemon",
+        "green tangerine",
+        "jasmine",
+        "rosemary",
+        "persimmon",
+        "freesia",
+        "musk",
+        "cedar",
+        "oakmoss"
+      ]
+    },
+    {
+      "name": "CK V2U",
+      "notes": [
+        "lemon",
+        "grapefruit",
+        "cactus",
+        "orchid",
+        "cedar",
+        "vanilla",
+        "amber"
+      ]
+    },
+    {
+      "name": "Don French",
+      "notes": []
+    },
+    {
+      "name": "Invictus Aqua Verified",
+      "notes": [
+        "grapefruit",
+        "violet leaf",
+        "sea notes",
+        "violet",
+        "woods",
+        "palisander rosewood",
+        "ambergris",
+        "amberwood"
+      ]
+    },
+    {
+      "name": "Hawas Fire",
+      "notes": [
+        "clary sage",
+        "marine notes",
+        "Egyptian jasmine",
+        "amber",
+        "mineral notes",
+        "ambergris"
+      ]
+    }
+  ]
+}
