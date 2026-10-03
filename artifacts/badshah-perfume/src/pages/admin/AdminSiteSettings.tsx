@@ -1211,7 +1211,7 @@ export const AdminSiteSettings: React.FC = () => {
                 rows={2}
                 value={formData.wholesaleNoticeBangla}
                 onChange={(e) => handleChange('wholesaleNoticeBangla', e.target.value)}
-                placeholder="পাইকারি মূল্য তালিকার দর প্রতি মিলি হিসেবে; ৫০ মিলি বোতল ও ন্যূনতম অর্ডার পরিমাণ অনুযায়ী মোট হিসাব হবে। বিস্তারিত জানতে ইনবক্স করুন।"
+                placeholder="মিনিমাম ৫০ মিলি নিতে হবে"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#14141a] border border-[#262635] text-white focus:outline-none focus:border-[#10b981] resize-none"
               />
             </div>
@@ -1219,14 +1219,14 @@ export const AdminSiteSettings: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-[#a1a1aa] font-bold uppercase tracking-wider mb-1">
-                  Minimum Wholesale Quantity (Flacons)
+                  Minimum Wholesale Quantity (ml)
                 </label>
                 <input
                   type="number"
-                  min={1}
+                  min={50}
                   value={formData.wholesaleMinQty}
                   onChange={(e) => handleChange('wholesaleMinQty', Number(e.target.value))}
-                  placeholder="5"
+                  placeholder="50"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[#14141a] border border-[#262635] text-white focus:outline-none focus:border-[#10b981]"
                 />
               </div>

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { SiteSettings } from '../types/index.ts';
+import { SiteSettings, WHOLESALE_MIN_ML } from '../types/index.ts';
 import { api } from '../services/api.ts';
 
 const FALLBACK_SETTINGS: SiteSettings = {
@@ -76,8 +76,8 @@ const FALLBACK_SETTINGS: SiteSettings = {
   customerServiceBadgeEnabled: true,
 
   // WHOLESALE / PAIKARI PORTAL
-  wholesaleNoticeBangla: 'পাইকারি মূল্য তালিকার দর প্রতি মিলি হিসেবে; ৫০ মিলি বোতল ও ন্যূনতম অর্ডার পরিমাণ অনুযায়ী মোট হিসাব হবে। বিস্তারিত জানতে ইনবক্স করুন।',
-  wholesaleMinQty: 5,
+  wholesaleNoticeBangla: 'মিনিমাম ৫০ মিলি নিতে হবে',
+  wholesaleMinQty: WHOLESALE_MIN_ML,
   wholesaleDiscountPercent: 25,
 
   // SOCIALS & CONTACT

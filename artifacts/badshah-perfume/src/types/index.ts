@@ -6,6 +6,8 @@ export type DeliveryLocation = 'inside_dhaka' | 'outside_dhaka';
 
 export type ReviewStatus = 'Pending' | 'Approved' | 'Rejected';
 
+export const WHOLESALE_MIN_ML = 50;
+
 export interface ProductSize {
   id: string;
   productId: string;
@@ -44,6 +46,7 @@ export interface CartItem {
   sizeLabel: string;
   unitPrice: number;
   quantity: number;
+  isWholesale?: boolean;
 }
 
 export interface OrderItem {

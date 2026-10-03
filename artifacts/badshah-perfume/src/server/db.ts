@@ -18,6 +18,7 @@ import {
   Coupon,
   CustomRequest,
   BroadcastNotification,
+  WHOLESALE_MIN_ML,
 } from '../types/index.ts';
 import { INITIAL_PRODUCTS } from '../data/initialProducts.ts';
 import { PDF_WHOLESALE_RATES, normalizeWholesaleProductName } from '../data/wholesalePrices.ts';
@@ -134,8 +135,8 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   customerServiceBadgeEnabled: true,
 
   // WHOLESALE / PAIKARI PORTAL
-  wholesaleNoticeBangla: 'পাইকারি মূল্য তালিকার দর প্রতি মিলি হিসেবে; ৫০ মিলি বোতল ও ন্যূনতম অর্ডার পরিমাণ অনুযায়ী মোট হিসাব হবে। বিস্তারিত জানতে ইনবক্স করুন।',
-  wholesaleMinQty: 5,
+  wholesaleNoticeBangla: 'মিনিমাম ৫০ মিলি নিতে হবে',
+  wholesaleMinQty: WHOLESALE_MIN_ML,
   wholesaleDiscountPercent: 25,
 
   // SOCIALS & CONTACT
@@ -625,7 +626,7 @@ class Database {
     customerId?: string;
     orderType?: 'RETAIL' | 'WHOLESALE';
     isWholesale?: boolean;
-    items: Array<{ productId: string; sizeLabel: string; quantity: number }>;
+    items: Array<{ productId: string; sizeLabel: string; quantity: number; isWholesale?: boolean }>;
   }): { success: boolean; order?: Order; error?: string } {
     if (!orderInput.customerName || !orderInput.customerPhone || !orderInput.customerAddress || !orderInput.district) {
       return { success: false, error: 'Full customer details are required.' };
@@ -639,16 +640,17 @@ class Database {
     const now = new Date().toISOString();
 
     const isWholesaleOrder =
-      orderInput.isWholesale === true || orderInput.orderType === 'WHOLESALE';
-    const wholesaleItemCount = orderInput.items.reduce(
-      (count, item) => count + Math.max(0, Math.floor(Number(item.quantity) || 0)),
-      0
+      orderInput.isWholesale === true ||
+      orderInput.orderType === 'WHOLESALE' ||
+      orderInput.items.some((item) => item.isWholesale === true);
+    const minimumWholesaleMl = Math.max(
+      WHOLESALE_MIN_ML,
+      Math.floor(Number(this.getSettings().wholesaleMinQty) || WHOLESALE_MIN_ML)
     );
-    const minimumWholesaleQty = Math.max(1, Math.floor(this.getSettings().wholesaleMinQty || 5));
-    if (isWholesaleOrder && wholesaleItemCount < minimumWholesaleQty) {
+    if (orderInput.items.some((item) => item.isWholesale === true && Number(item.quantity) < minimumWholesaleMl)) {
       return {
         success: false,
-        error: `Wholesale orders require at least ${minimumWholesaleQty} bottles.`,
+        error: `প্রতিটি পাইকারি পারফিউমের জন্য কমপক্ষে ${minimumWholesaleMl} মিলি নিতে হবে।`,
       };
     }
 
@@ -666,17 +668,18 @@ class Database {
 
       let sizeLabel = itemInput.sizeLabel;
       let unitPrice: number;
-      if (isWholesaleOrder) {
-        const requestedMl = Number(itemInput.sizeLabel.match(/(\d+(?:\.\d+)?)\s*ml/i)?.[1]);
-        if (requestedMl !== 50) {
-          return { success: false, error: 'Wholesale orders are only available in 50 ml flacons.' };
+      let quantity = Math.max(1, Math.floor(Number(itemInput.quantity) || 0));
+      if (itemInput.isWholesale === true) {
+        if (quantity < minimumWholesaleMl) {
+          return { success: false, error: `পাইকারি অর্ডারের জন্য কমপক্ষে ${minimumWholesaleMl} মিলি নিতে হবে।` };
         }
         const pricePerMl = Number(product.wholesalePricePerMl);
         if (!Number.isFinite(pricePerMl) || pricePerMl <= 0) {
           return { success: false, error: `No wholesale rate is available for "${product.name}".` };
         }
-        sizeLabel = '50 ml (Wholesale Flacon)';
-        unitPrice = Math.round(pricePerMl * 50 * 100) / 100;
+        sizeLabel = `${quantity} ml (পাইকারি)`;
+        unitPrice = Math.round(pricePerMl * quantity * 100) / 100;
+        quantity = 1;
       } else {
         const size = product.sizes.find(
           (s) => s.sizeLabel.toLowerCase() === itemInput.sizeLabel.toLowerCase()
@@ -688,7 +691,6 @@ class Database {
         unitPrice = size.price;
       }
 
-      const quantity = Math.max(1, Math.floor(itemInput.quantity));
       const totalPrice = unitPrice * quantity;
       subtotal += totalPrice;
 
@@ -751,8 +753,8 @@ class Database {
       status: 'Pending',
       notes: (orderInput.notes || '').trim(),
       customerId: orderInput.customerId,
-      orderType: orderInput.orderType || (orderInput.isWholesale ? 'WHOLESALE' : 'RETAIL'),
-      isWholesale: orderInput.isWholesale || orderInput.orderType === 'WHOLESALE' || false,
+      orderType: isWholesaleOrder ? 'WHOLESALE' : 'RETAIL',
+      isWholesale: isWholesaleOrder,
       createdAt: now,
       updatedAt: now,
       items: orderItems,

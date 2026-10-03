@@ -1,45 +1,28 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Product, DeliveryLocation } from '../types/index.ts';
+import { Product, ProductSize, WHOLESALE_MIN_ML } from '../types/index.ts';
 import { api } from '../services/api.ts';
 import { useSiteSettings } from '../context/SiteSettingsContext.tsx';
+import { useCart } from '../context/CartContext.tsx';
 import {
   Package,
   MessageCircle,
-  Sparkles,
-  CheckCircle2,
-  AlertCircle,
-  ArrowRight,
   ShieldCheck,
   Search,
-  SlidersHorizontal,
+  Plus,
 } from 'lucide-react';
 
 interface WholesalePageProps {
   onBackToHome: () => void;
-  onNavigateToOrderConfirmation: (orderNumber: string) => void;
 }
 
 export const WholesalePage: React.FC<WholesalePageProps> = ({
   onBackToHome,
-  onNavigateToOrderConfirmation,
 }) => {
   const { settings } = useSiteSettings();
+  const { addItem } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-
-  // Wholesale Checkout State
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
-  const [quantity, setQuantity] = useState(settings.wholesaleMinQty || 5);
-  const [customerName, setCustomerName] = useState('');
-  const [customerPhone, setCustomerPhone] = useState('');
-  const [customerAddress, setCustomerAddress] = useState('');
-  const [district, setDistrict] = useState('Dhaka');
-  const [deliveryLocation, setDeliveryLocation] = useState<DeliveryLocation>('inside_dhaka');
-  const [notes, setNotes] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [successOrderNumber, setSuccessOrderNumber] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCatalog = async () => {
@@ -89,57 +72,20 @@ export const WholesalePage: React.FC<WholesalePageProps> = ({
   const formatTaka = (value: number): string =>
     `৳${value.toLocaleString('en-BD', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-  const handleOpenWholesaleOrder = (p: Product) => {
-    setSelectedProduct(p);
-    setQuantity(settings.wholesaleMinQty || 5);
-    setError(null);
-  };
+  const minimumWholesaleMl = Math.max(
+    WHOLESALE_MIN_ML,
+    Math.floor(Number(settings.wholesaleMinQty) || WHOLESALE_MIN_ML)
+  );
 
-  const handlePlaceWholesaleOrder = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedProduct) return;
-    if (!customerName.trim() || !customerPhone.trim() || !customerAddress.trim()) {
-      setError('অনুগ্রহ করে নাম, মোবাইল নম্বর এবং সম্পূর্ণ ডেলিভারি ঠিকানা প্রদান করুন।');
-      return;
-    }
-
-    if (quantity < (settings.wholesaleMinQty || 5)) {
-      setError(`পাইকারি অর্ডারের জন্য সর্বনিম্ন ${settings.wholesaleMinQty || 5} বোতল অর্ডার করতে হবে।`);
-      return;
-    }
-
-    setSubmitting(true);
-    setError(null);
-
-    try {
-      const res = await api.createOrder({
-        customerName: customerName.trim(),
-        customerPhone: customerPhone.trim(),
-        customerAddress: customerAddress.trim(),
-        district: district.trim(),
-        deliveryArea: district,
-        deliveryLocation,
-        notes: `[WHOLESALE ORDER] ${notes}`.trim(),
-        orderType: 'WHOLESALE',
-        isWholesale: true,
-        items: [
-          {
-            productId: selectedProduct.id,
-            sizeLabel: '50 ml (Wholesale Flacon)',
-            quantity,
-          },
-        ],
-      });
-
-      setSuccessOrderNumber(res.order.orderNumber);
-      setTimeout(() => {
-        onNavigateToOrderConfirmation(res.order.orderNumber);
-      }, 1500);
-    } catch (err: any) {
-      setError(err.message || 'অর্ডার করতে সমস্যা হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।');
-    } finally {
-      setSubmitting(false);
-    }
+  const handleAddToCart = (product: Product) => {
+    const size: ProductSize = {
+      id: `wholesale-per-ml-${product.id}`,
+      productId: product.id,
+      sizeLabel: 'পাইকারি (প্রতি মিলি)',
+      price: getWholesalePricePerMl(product),
+      isAvailable: product.stockStatus !== 'Out of Stock',
+    };
+    addItem(product, size, minimumWholesaleMl, true);
   };
 
   const whatsappDirectUrl = `https://wa.me/${(settings.whatsappNumber || '+8801700000000').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
@@ -198,15 +144,11 @@ export const WholesalePage: React.FC<WholesalePageProps> = ({
 
       {/* Main Catalog View (Strictly Text-Only: Zero images) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
-        {/* MANDATORY TOP BANGLA NOTICE - Exactly as specified */}
+        {/* Minimum wholesale volume */}
         <div className="p-4 sm:p-5 rounded-xl bg-[#09150f] border border-emerald-500/50 text-emerald-300 font-bold text-sm sm:text-base text-center shadow-lg shadow-emerald-950/40">
           {settings.wholesaleNoticeBangla ||
-            'পাইকারি মূল্যে পারফিউমের বোতল, প্রিমিক্স, অয়েল এবং সকল উপাদান পাওয়া যায়। বিস্তারিত জানতে ইনবক্স করুন।'}
+            'মিনিমাম ৫০ মিলি নিতে হবে'}
         </div>
-        <p className="text-center text-[11px] sm:text-xs text-[#8b9290]">
-          PDF তালিকার দর ৳/মিলি হিসেবে দেওয়া হয়েছে; ৫০ মিলি বোতলের দাম = মিলি-প্রতি দর × ৫০।
-          <span className="block mt-1">মূল তালিকার নোট: “Original price + 4.00 Tk”</span>
-        </p>
 
         {/* Search & Header Stats Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-[#0a0a0d] p-4 rounded-xl border border-[#1e1e26]">
@@ -278,10 +220,13 @@ export const WholesalePage: React.FC<WholesalePageProps> = ({
                       <td className="py-3 px-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <button
-                            onClick={() => handleOpenWholesaleOrder(p)}
-                            className="px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-xs transition-all shadow-sm"
+                            onClick={() => handleAddToCart(p)}
+                            disabled={p.stockStatus === 'Out of Stock'}
+                            aria-label={`${p.name} কার্টে যোগ করুন`}
+                            title="কার্টে যোগ করুন"
+                            className="p-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 disabled:opacity-40 disabled:cursor-not-allowed text-black transition-all shadow-sm"
                           >
-                            অর্ডার
+                            <Plus className="w-4 h-4" />
                           </button>
                           <a
                             href={`https://wa.me/${(settings.whatsappNumber || '+8801700000000').replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
@@ -305,171 +250,6 @@ export const WholesalePage: React.FC<WholesalePageProps> = ({
         )}
       </div>
 
-      {/* Wholesale Order Modal */}
-      {selectedProduct && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-fadeIn">
-          <div className="relative w-full max-w-lg bg-[#0a0a0f] border border-[#232330] rounded-2xl shadow-2xl p-6 sm:p-8 space-y-6 text-white max-h-[90vh] overflow-y-auto">
-            <div className="flex items-start justify-between">
-              <div>
-                <span className="text-xs text-emerald-400 font-semibold uppercase tracking-wider">
-                  পাইকারি অর্ডার বুকিং
-                </span>
-                <h2 className="text-xl font-serif font-bold text-white mt-0.5">
-                  {selectedProduct.name} (৫০ মিলি)
-                </h2>
-              </div>
-              <button
-                onClick={() => setSelectedProduct(null)}
-                className="p-1.5 text-[#71717a] hover:text-white rounded-lg hover:bg-[#1a1a24]"
-              >
-                ✕
-              </button>
-            </div>
-
-            {error && (
-              <div className="p-3 bg-red-950/80 border border-red-800 text-red-300 text-xs rounded-lg flex items-center gap-2">
-                <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                <span>{error}</span>
-              </div>
-            )}
-
-            {successOrderNumber ? (
-              <div className="p-6 bg-emerald-950/80 border border-emerald-700 text-emerald-200 rounded-xl text-center space-y-3">
-                <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto" />
-                <h3 className="font-bold text-base">পাইকারি অর্ডার সম্পন্ন হয়েছে!</h3>
-                <p className="text-xs text-emerald-300">অর্ডার নম্বর: #{successOrderNumber}</p>
-              </div>
-            ) : (
-              <form onSubmit={handlePlaceWholesaleOrder} className="space-y-4">
-                <div className="p-3 rounded-lg bg-[#14141c] border border-[#232330] flex items-center justify-between text-xs">
-                  <div>
-                    <span className="text-[#a1a1aa]">৫০ মিলি বোতলের দাম:</span>
-                    <span className="font-bold text-white ml-1">
-                      {getWholesalePrice50ml(selectedProduct) > 0
-                        ? formatTaka(getWholesalePrice50ml(selectedProduct))
-                        : 'ইনবক্সে নির্ধারিত'}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-[#a1a1aa]">সর্বমোট:</span>
-                    <span className="font-bold text-emerald-400 ml-1 text-sm">
-                      {formatTaka(getWholesalePrice50ml(selectedProduct) * quantity)}
-                    </span>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#a1a1aa] mb-1">
-                    বোতল সংখ্যা (সর্বনিম্ন {settings.wholesaleMinQty || 5} টি):
-                  </label>
-                  <input
-                    type="number"
-                    min={settings.wholesaleMinQty || 5}
-                    value={quantity}
-                    onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#14141d] border border-[#262635] text-white focus:outline-none focus:border-emerald-500 text-sm font-semibold"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#a1a1aa] mb-1">
-                    আপনার নাম:
-                  </label>
-                  <input
-                    type="text"
-                    value={customerName}
-                    onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder="উদা: মোঃ আরিফুল ইসলাম"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#14141d] border border-[#262635] text-white focus:outline-none focus:border-emerald-500 text-sm"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#a1a1aa] mb-1">
-                    মোবাইল নম্বর:
-                  </label>
-                  <input
-                    type="tel"
-                    value={customerPhone}
-                    onChange={(e) => setCustomerPhone(e.target.value)}
-                    placeholder="01XXXXXXXXX"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#14141d] border border-[#262635] text-white focus:outline-none focus:border-emerald-500 text-sm"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#a1a1aa] mb-1">
-                    জেলা:
-                  </label>
-                  <input
-                    type="text"
-                    value={district}
-                    onChange={(e) => setDistrict(e.target.value)}
-                    placeholder="উদা: ঢাকা, চট্টগ্রাম, রাজশাহী..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#14141d] border border-[#262635] text-white focus:outline-none focus:border-emerald-500 text-sm"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#a1a1aa] mb-1">
-                    সম্পূর্ণ ডেলিভারি ঠিকানা:
-                  </label>
-                  <textarea
-                    value={customerAddress}
-                    onChange={(e) => setCustomerAddress(e.target.value)}
-                    placeholder="দোকান বা বাসার সম্পূর্ণ ঠিকানা..."
-                    rows={2}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-[#14141d] border border-[#262635] text-white focus:outline-none focus:border-emerald-500 text-sm"
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-[#a1a1aa] mb-1">
-                    ডেলিভারি এলাকা:
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setDeliveryLocation('inside_dhaka')}
-                      className={`p-2.5 rounded-xl text-xs font-bold border transition-all text-center ${
-                        deliveryLocation === 'inside_dhaka'
-                          ? 'bg-emerald-500/20 border-emerald-500 text-white'
-                          : 'bg-[#14141d] border-[#262635] text-[#a1a1aa]'
-                      }`}
-                    >
-                      ঢাকার ভিতরে
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setDeliveryLocation('outside_dhaka')}
-                      className={`p-2.5 rounded-xl text-xs font-bold border transition-all text-center ${
-                        deliveryLocation === 'outside_dhaka'
-                          ? 'bg-emerald-500/20 border-emerald-500 text-white'
-                          : 'bg-[#14141d] border-[#262635] text-[#a1a1aa]'
-                      }`}
-                    >
-                      ঢাকার বাইরে
-                    </button>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black font-bold text-sm transition-all shadow-lg shadow-emerald-500/20 disabled:opacity-50 mt-2"
-                >
-                  {submitting ? 'অর্ডার প্রসেস হচ্ছে...' : 'পাইকারি অর্ডার কনফার্ম করুন'}
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 };

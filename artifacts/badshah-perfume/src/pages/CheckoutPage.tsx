@@ -72,6 +72,7 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBack, onOrderSucce
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showInvoiceReview, setShowInvoiceReview] = useState(false);
 
   // Pre-fill fields if customer is logged in
   useEffect(() => {
@@ -84,8 +85,45 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBack, onOrderSucce
   }, [customer]);
 
   const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
+  const hasWholesaleItems = items.some((item) => item.isWholesale);
   const discountAmount = appliedCoupon ? appliedCoupon.discountAmount : 0;
   const grandTotal = Math.max(0, subtotal - discountAmount) + deliveryCharge;
+
+  const submitOrder = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        customerName: customerName.trim(),
+        customerPhone: customerPhone.trim(),
+        customerAddress: customerAddress.trim(),
+        district: district.trim(),
+        deliveryArea: deliveryArea.trim(),
+        deliveryLocation,
+        notes: notes.trim(),
+        couponCode: appliedCoupon?.code,
+        customerId: customer?.id,
+        orderType: hasWholesaleItems ? 'WHOLESALE' as const : 'RETAIL' as const,
+        isWholesale: hasWholesaleItems,
+        items: items.map((item) => ({
+          productId: item.productId,
+          sizeId: item.sizeId,
+          sizeLabel: item.sizeLabel,
+          quantity: item.quantity,
+          isWholesale: item.isWholesale,
+        })),
+      };
+
+      const res = await api.createOrder(payload);
+      clearCart();
+      setShowInvoiceReview(false);
+      onOrderSuccess(res.order);
+    } catch (err: any) {
+      setErrorMessage(err.message || 'Failed to place order. Please review your details and try again.');
+      setShowInvoiceReview(false);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleLocationChange = (loc: DeliveryLocation) => {
     setDeliveryLocation(loc);
@@ -160,35 +198,12 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBack, onOrderSucce
       return;
     }
 
-    setLoading(true);
-
-    try {
-      const payload = {
-        customerName: customerName.trim(),
-        customerPhone: customerPhone.trim(),
-        customerAddress: customerAddress.trim(),
-        district: district.trim(),
-        deliveryArea: deliveryArea.trim(),
-        deliveryLocation,
-        notes: notes.trim(),
-        couponCode: appliedCoupon?.code,
-        customerId: customer?.id,
-        items: items.map((i) => ({
-          productId: i.productId,
-          sizeId: i.sizeId,
-          sizeLabel: i.sizeLabel,
-          quantity: i.quantity,
-        })),
-      };
-
-      const res = await api.createOrder(payload);
-      clearCart();
-      onOrderSuccess(res.order);
-    } catch (err: any) {
-      setErrorMessage(err.message || 'Failed to place order. Please review your details and try again.');
-    } finally {
-      setLoading(false);
+    if (hasWholesaleItems) {
+      setShowInvoiceReview(true);
+      return;
     }
+
+    await submitOrder();
   };
 
   return (
@@ -425,6 +440,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBack, onOrderSucce
                   ? 'Processing Order...'
                   : settings.requireCustomerLogin && !customer
                   ? 'Sign In to Place Order'
+                  : hasWholesaleItems
+                  ? `বিল দেখে নিশ্চিত করুন (৳${grandTotal.toLocaleString()})`
                   : `Place Order (৳${grandTotal.toLocaleString()})`}
               </span>
             </button>
@@ -457,7 +474,9 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBack, onOrderSucce
                       {item.productName}
                     </h4>
                     <span className="text-[11px] text-[#10b981] font-semibold block">
-                      {item.sizeLabel} × {item.quantity}
+                      {item.isWholesale
+                        ? `${item.quantity} মিলি পাইকারি`
+                        : `${item.sizeLabel} × ${item.quantity}`}
                     </span>
                   </div>
                 </div>
@@ -559,6 +578,123 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onBack, onOrderSucce
           </div>
         </div>
       </div>
+
+      {showInvoiceReview && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 backdrop-blur-sm p-3 sm:p-6">
+          <section
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="wholesale-invoice-title"
+            className="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-2xl border border-emerald-700/50 bg-[#0e0e13] p-5 sm:p-7 text-white shadow-2xl"
+          >
+            <div className="flex items-start justify-between gap-4 border-b border-[#262630] pb-4">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                  অর্ডার নিশ্চিত করার আগে
+                </span>
+                <h2 id="wholesale-invoice-title" className="mt-1 text-xl sm:text-2xl font-bold">
+                  আপনার অর্ডার বিল
+                </h2>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowInvoiceReview(false)}
+                disabled={loading}
+                aria-label="বিল বন্ধ করুন"
+                className="rounded-lg px-3 py-1 text-xl text-[#a1a1aa] hover:bg-[#20202a] hover:text-white disabled:opacity-50"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 text-sm">
+              <div className="rounded-xl border border-[#24242e] bg-[#141419] p-4">
+                <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-emerald-400">ক্রেতার তথ্য</h3>
+                <p className="font-semibold">{customerName}</p>
+                <p className="text-[#b7b7c0]">{customerPhone}</p>
+              </div>
+              <div className="rounded-xl border border-[#24242e] bg-[#141419] p-4">
+                <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-emerald-400">ডেলিভারি</h3>
+                <p>{district}{deliveryArea.trim() ? `, ${deliveryArea.trim()}` : ''}</p>
+                <p className="text-[#b7b7c0]">{customerAddress}</p>
+                <p className="mt-1 text-xs text-[#8f8f99]">
+                  {deliveryLocation === 'inside_dhaka' ? 'ঢাকার ভিতরে' : 'ঢাকার বাইরে'}
+                </p>
+              </div>
+            </div>
+
+            {notes.trim() && (
+              <div className="mt-4 rounded-xl border border-[#24242e] bg-[#141419] p-4 text-sm">
+                <h3 className="mb-1 text-xs font-bold uppercase tracking-wide text-emerald-400">বিশেষ নির্দেশনা</h3>
+                <p className="text-[#d1d1d8]">{notes.trim()}</p>
+              </div>
+            )}
+
+            <div className="mt-5 overflow-hidden rounded-xl border border-[#24242e]">
+              <div className="bg-[#17171e] px-4 py-3 text-xs font-bold uppercase tracking-wide text-emerald-400">
+                পণ্যের বিল
+              </div>
+              <div className="divide-y divide-[#24242e]">
+                {items.map((item) => (
+                  <div key={`${item.productId}-${item.sizeLabel}`} className="flex items-center justify-between gap-4 px-4 py-3">
+                    <div className="min-w-0">
+                      <p className="font-semibold">{item.productName}</p>
+                      <p className="text-xs text-[#a1a1aa]">
+                        {item.isWholesale
+                          ? `${item.quantity} মিলি × ${item.unitPrice.toLocaleString('en-BD', { maximumFractionDigits: 2 })} টাকা/মিলি`
+                          : `${item.sizeLabel} × ${item.quantity}`}
+                      </p>
+                    </div>
+                    <p className="shrink-0 font-bold tabular-nums">
+                      ৳{(item.unitPrice * item.quantity).toLocaleString('en-BD', { maximumFractionDigits: 2 })}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-4 space-y-2 rounded-xl border border-[#24242e] bg-[#141419] p-4 text-sm">
+              <div className="flex justify-between gap-4 text-[#b7b7c0]">
+                <span>পণ্যের মোট</span>
+                <span>৳{subtotal.toLocaleString('en-BD', { maximumFractionDigits: 2 })}</span>
+              </div>
+              {appliedCoupon && (
+                <div className="flex justify-between gap-4 text-emerald-400">
+                  <span>কুপন ছাড় ({appliedCoupon.code})</span>
+                  <span>-৳{discountAmount.toLocaleString('en-BD', { maximumFractionDigits: 2 })}</span>
+                </div>
+              )}
+              <div className="flex justify-between gap-4 text-[#b7b7c0]">
+                <span>ডেলিভারি চার্জ</span>
+                <span>৳{deliveryCharge.toLocaleString('en-BD')}</span>
+              </div>
+              <div className="flex justify-between gap-4 border-t border-[#30303a] pt-3 text-base font-bold">
+                <span>সর্বমোট (ক্যাশ অন ডেলিভারি)</span>
+                <span className="text-emerald-400">৳{grandTotal.toLocaleString('en-BD', { maximumFractionDigits: 2 })}</span>
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={() => setShowInvoiceReview(false)}
+                disabled={loading}
+                className="rounded-xl border border-[#343440] bg-[#17171e] px-4 py-3 text-sm font-semibold text-[#d1d1d8] hover:bg-[#20202a] disabled:opacity-50"
+              >
+                তথ্য সম্পাদনা করুন
+              </button>
+              <button
+                type="button"
+                onClick={submitOrder}
+                disabled={loading}
+                className="rounded-xl bg-emerald-500 px-4 py-3 text-sm font-bold text-black hover:bg-emerald-400 disabled:opacity-50"
+              >
+                {loading ? 'অর্ডার পাঠানো হচ্ছে…' : 'সব তথ্য ঠিক আছে — অর্ডার নিশ্চিত করুন'}
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </div>
   );
 };

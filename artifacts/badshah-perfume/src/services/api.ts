@@ -137,6 +137,7 @@ export const api = {
       sizeId?: string;
       sizeLabel: string;
       quantity: number;
+      isWholesale?: boolean;
     }>;
   }): Promise<{ message: string; order: Order }> {
     const res = await fetch('/api/orders', {

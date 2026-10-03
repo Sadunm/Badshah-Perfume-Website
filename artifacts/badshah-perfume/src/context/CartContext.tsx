@@ -1,12 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { CartItem, Product, ProductSize, DeliveryLocation } from '../types/index.ts';
+import { CartItem, Product, ProductSize, DeliveryLocation, WHOLESALE_MIN_ML } from '../types/index.ts';
 import { useSiteSettings } from './SiteSettingsContext.tsx';
 
 interface CartContextType {
   items: CartItem[];
-  addItem: (product: Product, size: ProductSize, quantity?: number) => boolean;
+  addItem: (product: Product, size: ProductSize, quantity?: number, isWholesale?: boolean) => boolean;
   removeItem: (productId: string, sizeLabel: string) => void;
   updateQuantity: (productId: string, sizeLabel: string, delta: number) => void;
+  setQuantity: (productId: string, sizeLabel: string, quantity: number) => void;
   clearCart: () => void;
   subtotal: number;
   itemCount: number;
@@ -34,6 +35,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [deliveryLocation, setDeliveryLocation] = useState<DeliveryLocation>('inside_dhaka');
+  const { settings } = useSiteSettings();
 
   useEffect(() => {
     try {
@@ -43,14 +45,17 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   }, [items]);
 
-  const addItem = (product: Product, size: ProductSize, quantity = 1): boolean => {
+  const addItem = (product: Product, size: ProductSize, quantity = 1, isWholesale = false): boolean => {
     if (product.stockStatus === 'Out of Stock' || !size.isAvailable) {
       return false;
     }
 
     setItems((prev) => {
       const existingIdx = prev.findIndex(
-        (i) => i.productId === product.id && i.sizeLabel.toLowerCase() === size.sizeLabel.toLowerCase()
+        (i) =>
+          i.productId === product.id &&
+          i.isWholesale === isWholesale &&
+          i.sizeLabel.toLowerCase() === size.sizeLabel.toLowerCase()
       );
 
       if (existingIdx > -1) {
@@ -67,6 +72,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         sizeLabel: size.sizeLabel,
         unitPrice: size.price,
         quantity,
+        isWholesale,
       };
 
       return [...prev, newItem];
@@ -96,6 +102,20 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
+  const setQuantity = (productId: string, sizeLabel: string, quantity: number) => {
+    setItems((prev) =>
+      prev.map((item) => {
+        if (item.productId !== productId || item.sizeLabel.toLowerCase() !== sizeLabel.toLowerCase()) {
+          return item;
+        }
+        const minimum = item.isWholesale
+          ? Math.max(WHOLESALE_MIN_ML, Math.floor(Number(settings.wholesaleMinQty) || WHOLESALE_MIN_ML))
+          : 1;
+        return { ...item, quantity: Math.max(minimum, Math.floor(Number(quantity) || minimum)) };
+      })
+    );
+  };
+
   const clearCart = () => {
     setItems([]);
     try {
@@ -105,9 +125,8 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const { settings } = useSiteSettings();
   const subtotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const itemCount = items.reduce((sum, item) => sum + (item.isWholesale ? 1 : item.quantity), 0);
   const deliveryCharge =
     deliveryLocation === 'inside_dhaka'
       ? (settings.deliveryFeeInsideDhaka ?? 80)
@@ -121,6 +140,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
         addItem,
         removeItem,
         updateQuantity,
+        setQuantity,
         clearCart,
         subtotal,
         itemCount,

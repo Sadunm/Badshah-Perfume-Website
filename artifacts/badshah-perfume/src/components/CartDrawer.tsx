@@ -1,7 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Trash2, Plus, Minus, ArrowRight, ShoppingBag, ShieldCheck } from 'lucide-react';
 import { useCart } from '../context/CartContext.tsx';
 import { useSiteSettings } from '../context/SiteSettingsContext.tsx';
+import { WHOLESALE_MIN_ML } from '../types/index.ts';
+
+const WholesaleMlInput: React.FC<{
+  value: number;
+  minimum: number;
+  onCommit: (quantity: number) => void;
+}> = ({ value, minimum, onCommit }) => {
+  const [draft, setDraft] = useState(String(value));
+
+  useEffect(() => setDraft(String(value)), [value]);
+
+  const commit = () => {
+    const next = Math.max(minimum, Math.floor(Number(draft) || minimum));
+    setDraft(String(next));
+    onCommit(next);
+  };
+
+  return (
+    <label className="flex items-center gap-2 text-[11px] text-[#a1a1aa]">
+      <span>পরিমাণ (মিলি, মিনিমাম {minimum})</span>
+      <input
+        type="number"
+        min={minimum}
+        step={1}
+        value={draft}
+        onChange={(event) => setDraft(event.target.value)}
+        onBlur={commit}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            commit();
+          }
+        }}
+        className="w-24 px-2 py-1 rounded bg-[#0f0f13] border border-[#343440] text-white text-xs tabular-nums focus:outline-none focus:border-emerald-500"
+      />
+    </label>
+  );
+};
 
 interface CartDrawerProps {
   onCheckout: () => void;
@@ -16,12 +54,17 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onCheckout, onExplore })
     setIsCartOpen,
     removeItem,
     updateQuantity,
+    setQuantity,
     subtotal,
     deliveryLocation,
     setDeliveryLocation,
     deliveryCharge,
     grandTotal,
   } = useCart();
+  const wholesaleMinimumMl = Math.max(
+    WHOLESALE_MIN_ML,
+    Math.floor(Number(settings.wholesaleMinQty) || WHOLESALE_MIN_ML)
+  );
 
   if (!isCartOpen) return null;
 
@@ -101,30 +144,42 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onCheckout, onExplore })
                       <div className="flex items-center gap-2 mt-0.5 text-xs text-emerald-400">
                         <span className="font-semibold">{item.sizeLabel}</span>
                         <span className="text-[#52525b]">·</span>
-                        <span className="text-[#a1a1aa] tabular-nums">৳{item.unitPrice} each</span>
+                        <span className="text-[#a1a1aa] tabular-nums">
+                          {item.isWholesale
+                            ? `৳${item.unitPrice.toLocaleString('en-BD', { maximumFractionDigits: 2 })} / ml`
+                            : `৳${item.unitPrice} each`}
+                        </span>
                       </div>
                     </div>
 
                     <div className="flex items-center justify-between mt-2 pt-2 border-t border-[#1e1e26]">
-                      <div className="flex items-center border border-[#272730] rounded bg-[#0f0f13]">
-                        <button
-                          onClick={() => updateQuantity(item.productId, item.sizeLabel, -1)}
-                          className="p-1 text-[#a1a1aa] hover:text-white"
-                          title="Decrease"
-                        >
-                          <Minus className="w-3 h-3" />
-                        </button>
-                        <span className="px-2 text-xs font-semibold text-white tabular-nums">
-                          {item.quantity}
-                        </span>
-                        <button
-                          onClick={() => updateQuantity(item.productId, item.sizeLabel, 1)}
-                          className="p-1 text-[#a1a1aa] hover:text-white"
-                          title="Increase"
-                        >
-                          <Plus className="w-3 h-3" />
-                        </button>
-                      </div>
+                      {item.isWholesale ? (
+                        <WholesaleMlInput
+                          value={item.quantity}
+                          minimum={wholesaleMinimumMl}
+                          onCommit={(quantity) => setQuantity(item.productId, item.sizeLabel, quantity)}
+                        />
+                      ) : (
+                        <div className="flex items-center border border-[#272730] rounded bg-[#0f0f13]">
+                          <button
+                            onClick={() => updateQuantity(item.productId, item.sizeLabel, -1)}
+                            className="p-1 text-[#a1a1aa] hover:text-white"
+                            title="Decrease"
+                          >
+                            <Minus className="w-3 h-3" />
+                          </button>
+                          <span className="px-2 text-xs font-semibold text-white tabular-nums">
+                            {item.quantity}
+                          </span>
+                          <button
+                            onClick={() => updateQuantity(item.productId, item.sizeLabel, 1)}
+                            className="p-1 text-[#a1a1aa] hover:text-white"
+                            title="Increase"
+                          >
+                            <Plus className="w-3 h-3" />
+                          </button>
+                        </div>
+                      )}
 
                       <span className="text-sm font-semibold text-white tabular-nums">
                         ৳{(item.unitPrice * item.quantity).toLocaleString()}

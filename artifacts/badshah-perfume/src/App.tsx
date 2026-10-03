@@ -257,13 +257,6 @@ const AppContent: React.FC = () => {
                   setCurrentPage('home');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                onNavigateToOrderConfirmation={(orderNum) => {
-                  api.getOrder(orderNum).then((ord) => {
-                    handleOrderSuccess(ord);
-                  }).catch(() => {
-                    setCurrentPage('home');
-                  });
-                }}
               />
             )}
 
