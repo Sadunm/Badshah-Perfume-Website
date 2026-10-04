@@ -148,6 +148,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   homepageBannerImageUrl: '',
   authBackgroundImageUrl: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&q=80&w=1200',
   defaultBottleImageUrl: DEFAULT_PERFUME_BOTTLE_IMAGE_URL,
+  randomizeWordColors: true,
 };
 
 const DEFAULT_HOMEPAGE: HomepageContent = {

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HomepageContent, Product } from '../../types/index.ts';
 import { api } from '../../services/api.ts';
 import { useSiteSettings } from '../../context/SiteSettingsContext.tsx';
-import { Upload, CheckCircle2, AlertCircle, Save } from 'lucide-react';
+import { Upload, CheckCircle2, AlertCircle, Save, ChevronUp, ChevronDown } from 'lucide-react';
 
 export const AdminHomepage: React.FC = () => {
   const { refreshSettings } = useSiteSettings();
@@ -55,6 +55,18 @@ export const AdminHomepage: React.FC = () => {
     }
   };
 
+  const moveFeaturedProduct = (fromIndex: number, direction: -1 | 1) => {
+    if (!content) return;
+    const featuredProductIds = [...(content.featuredProductIds || [])];
+    const targetIndex = fromIndex + direction;
+    if (targetIndex < 0 || targetIndex >= featuredProductIds.length) return;
+    [featuredProductIds[fromIndex], featuredProductIds[targetIndex]] = [
+      featuredProductIds[targetIndex],
+      featuredProductIds[fromIndex],
+    ];
+    setContent({ ...content, featuredProductIds });
+  };
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!content) return;
@@ -78,6 +90,7 @@ export const AdminHomepage: React.FC = () => {
   }
 
   if (!content) return null;
+  const selectedIds = content.featuredProductIds || [];
 
   return (
     <div className="space-y-6 max-w-4xl">
@@ -258,13 +271,61 @@ export const AdminHomepage: React.FC = () => {
               Featured Collection Products
             </h2>
             <p className="text-xs text-[#80808a] mt-1">
-              Choose up to six products for the homepage collection. Leave all unchecked to use the first six active products.
+              Choose up to six products and set their display order. Leave all unchecked to use the first six active products.
             </p>
+          </div>
+          <div className="space-y-2 rounded-xl border border-[#262635] bg-[#0b0b10] p-3">
+            <p className="text-[11px] font-bold uppercase tracking-wider text-[#a1a1aa]">
+              Display order — first card appears first
+            </p>
+            {selectedIds.length > 0 ? (
+              <div className="space-y-1.5">
+                {selectedIds.map((id, index) => {
+                  const product = products.find((item) => item.id === id);
+                  if (!product) return null;
+                  return (
+                    <div
+                      key={id}
+                      className="flex items-center gap-2 rounded-lg bg-[#14141a] px-3 py-2"
+                    >
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#10b981]/15 text-[11px] font-bold text-emerald-300">
+                        {index + 1}
+                      </span>
+                      <span className="min-w-0 flex-1 truncate text-xs font-semibold text-white">
+                        {product.name}
+                      </span>
+                      <button
+                        type="button"
+                        aria-label={`Move ${product.name} up`}
+                        disabled={index === 0}
+                        onClick={() => moveFeaturedProduct(index, -1)}
+                        className="rounded p-1 text-[#a1a1aa] hover:bg-[#252530] hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                      >
+                        <ChevronUp className="h-4 w-4" />
+                      </button>
+                      <button
+                        type="button"
+                        aria-label={`Move ${product.name} down`}
+                        disabled={index === selectedIds.length - 1}
+                        onClick={() => moveFeaturedProduct(index, 1)}
+                        className="rounded p-1 text-[#a1a1aa] hover:bg-[#252530] hover:text-white disabled:cursor-not-allowed disabled:opacity-30"
+                      >
+                        <ChevronDown className="h-4 w-4" />
+                      </button>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-xs text-[#73737e]">
+                No custom order yet. The first six products in the catalog will be shown.
+              </p>
+            )}
           </div>
           <div className="max-h-80 overflow-y-auto rounded-xl border border-[#262635] divide-y divide-[#22222d]">
             {products.map((product) => {
-              const selectedIds = content.featuredProductIds || [];
               const selected = selectedIds.includes(product.id);
+              const selectedIndex = selectedIds.indexOf(product.id);
               return (
                 <label
                   key={product.id}
@@ -287,6 +348,11 @@ export const AdminHomepage: React.FC = () => {
                     className="h-4 w-4 accent-emerald-500"
                   />
                   <span className="min-w-0 flex-1 truncate">{product.name}</span>
+                  {selectedIndex >= 0 && (
+                    <span className="rounded bg-[#10b981]/15 px-2 py-0.5 text-[10px] font-bold text-emerald-300">
+                      #{selectedIndex + 1}
+                    </span>
+                  )}
                   <span className="text-xs text-[#80808a]">{product.fragranceType}</span>
                 </label>
               );

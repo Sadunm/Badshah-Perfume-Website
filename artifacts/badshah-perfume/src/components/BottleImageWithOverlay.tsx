@@ -47,12 +47,12 @@ export const BottleImageWithOverlay: React.FC<BottleImageWithOverlayProps> = ({
   };
 
   const stickerFontSize = Math.min(
-    20,
-    (compact ? 190 : 220) / Math.max(8, name.trim().length)
+    compact ? 14 : 11,
+    110 / Math.max(8, name.trim().length)
   );
   const stickerSizeClass = compact
     ? 'h-[34%] max-h-[22px] w-[45%] max-w-[48px] min-h-0 min-w-0 rounded-[1px] px-0.5 py-0'
-    : 'h-[13%] min-h-[25px] max-h-[42px] w-[28%] min-w-[60px] max-w-[142px] rounded-[2px] px-1.5 py-0.5';
+    : 'h-[16%] min-h-[30px] max-h-[48px] w-[32%] min-w-[64px] max-w-[154px] rounded-[2px] px-1.5 py-0.5';
 
   return (
     <div className={`relative ${aspectRatio} w-full overflow-hidden bg-[#121217]`}>
@@ -67,18 +67,34 @@ export const BottleImageWithOverlay: React.FC<BottleImageWithOverlayProps> = ({
 
       {showNameSticker && (
         <div
-          className={`absolute left-1/2 top-[61%] z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden border border-[#e7d19a] bg-[#f0dfb9]/95 shadow-[0_2px_7px_rgba(0,0,0,0.45)] [container-type:inline-size] ${stickerSizeClass}`}
+          className={`absolute left-1/2 top-[61%] z-10 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center overflow-hidden border border-[#f5e3b4] bg-gradient-to-br from-[#fff7df] via-[#f1dfb7] to-[#d7bd83] shadow-[0_3px_10px_rgba(0,0,0,0.52),inset_0_1px_0_rgba(255,255,255,0.72)] [container-type:inline-size] ${stickerSizeClass}`}
         >
+          {!compact && (
+            <span className="pointer-events-none absolute inset-[3px] rounded-[1px] border border-[#9c7941]/55" />
+          )}
+          {!compact && (
+            <div className="relative z-10 flex w-full items-center justify-center gap-1 opacity-80">
+              <span className="h-px w-3 bg-gradient-to-r from-transparent to-[#8b6b33]" />
+              <Crown className="h-[7px] w-[7px] shrink-0 text-[#8b6b33]" />
+              <span className="h-px w-3 bg-gradient-to-l from-transparent to-[#8b6b33]" />
+            </div>
+          )}
           <span
-            className={`w-full select-none break-words text-center font-serif font-semibold uppercase leading-tight tracking-wide text-[#352515] ${
-              compact ? 'line-clamp-2' : 'line-clamp-3'
+            className={`relative z-10 w-full select-none break-words text-center font-serif font-semibold uppercase leading-tight ${
+              compact
+                ? 'line-clamp-2 tracking-wide text-[#352515]'
+                : 'line-clamp-2 tracking-[0.08em] text-[#302318]'
             }`}
             style={{
-              fontSize: `clamp(${compact ? 5 : 7}px, ${stickerFontSize}cqw, ${compact ? 9 : 14}px)`,
+              fontSize: `clamp(${compact ? 5 : 7}px, ${stickerFontSize}cqw, ${compact ? 9 : 12}px)`,
+              textShadow: compact ? undefined : '0 1px 0 rgba(255,255,255,0.55)',
             }}
           >
             {name}
           </span>
+          {!compact && (
+            <span className="relative z-10 mt-0.5 h-[3px] w-[3px] rotate-45 border border-[#9c7941]/80 bg-[#d0b16d]" />
+          )}
         </div>
       )}
 

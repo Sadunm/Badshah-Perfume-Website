@@ -1,1 +1,2 @@
 - [Perfume bottle labels](perfume-bottle-labels.md) — use the supplied bottle as the standard template and auto-fit each perfume name, including new admin products.
+- [Storefront word colors](storefront-word-colors.md) — apply per-word color changes without wrapping or mutating React-managed text nodes.

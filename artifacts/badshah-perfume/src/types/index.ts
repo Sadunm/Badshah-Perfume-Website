@@ -202,6 +202,7 @@ export interface SiteSettings {
   backgroundColor: string;
   textColor: string;
   accentColor: string;
+  randomizeWordColors: boolean;
 
   // HERO & BANNERS
   heroTitle: string;

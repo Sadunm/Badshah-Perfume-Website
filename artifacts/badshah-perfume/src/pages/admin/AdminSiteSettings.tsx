@@ -516,6 +516,45 @@ export const AdminSiteSettings: React.FC = () => {
               </div>
             </div>
           </div>
+
+          <div className="p-6 rounded-2xl bg-[#0f0f14] border border-[#202028]">
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-xs font-bold uppercase tracking-wider text-[#10b981]">
+                  Random Color Per Word
+                </h2>
+                <p className="mt-1 max-w-2xl text-[11px] leading-relaxed text-[#80808a]">
+                  Give every storefront word a rotating jewel-tone color. Colors are picked for contrast and stay fixed until the next page load. Admin text is not affected.
+                </p>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                aria-label="Random color per word"
+                aria-checked={formData.randomizeWordColors !== false}
+                onClick={() =>
+                  handleChange('randomizeWordColors', formData.randomizeWordColors === false)
+                }
+                className={`relative h-7 w-12 shrink-0 rounded-full border transition-colors ${
+                  formData.randomizeWordColors !== false
+                    ? 'border-emerald-400 bg-emerald-500/80'
+                    : 'border-[#424250] bg-[#272732]'
+                }`}
+              >
+                <span
+                  className={`absolute top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${
+                    formData.randomizeWordColors !== false ? 'translate-x-[22px]' : 'translate-x-0.5'
+                  }`}
+                />
+              </button>
+            </div>
+            <p className="mt-3 text-[11px] font-semibold">
+              <span className={formData.randomizeWordColors !== false ? 'text-emerald-400' : 'text-[#80808a]'}>
+                {formData.randomizeWordColors !== false ? 'ON — enabled by default' : 'OFF — storefront uses its normal text colors'}
+              </span>
+              <span className="ml-2 text-[#656572]">Click “Save All Settings” to publish the change.</span>
+            </p>
+          </div>
         </div>
       )}
 

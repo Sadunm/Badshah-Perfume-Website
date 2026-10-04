@@ -8,6 +8,7 @@ import { Footer } from './components/Footer.tsx';
 import { CartDrawer } from './components/CartDrawer.tsx';
 import { CustomerAuthModal } from './components/CustomerAuthModal.tsx';
 import { PushNotificationPrompt } from './components/PushNotificationPrompt.tsx';
+import { RandomWordColorEffect } from './components/RandomWordColorEffect.tsx';
 import { HomePage } from './pages/HomePage.tsx';
 import { ProductDetailsPage } from './pages/ProductDetailsPage.tsx';
 import { CheckoutPage } from './pages/CheckoutPage.tsx';
@@ -206,6 +207,7 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0c] text-[#f3f4f6] flex flex-col font-sans">
+      <RandomWordColorEffect enabled={settings.randomizeWordColors !== false} />
       {/* Header */}
       <Header onNavigate={handleNavigate} currentPage={currentPage} />
 

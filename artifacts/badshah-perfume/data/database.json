@@ -17721,6 +17721,7 @@
     "homepageVideoUrl": "",
     "homepageBannerImageUrl": "",
     "authBackgroundImageUrl": "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&q=80&w=1200",
-    "defaultBottleImageUrl": "/images/perfume-bottle-template.png"
+    "defaultBottleImageUrl": "/images/perfume-bottle-template.png",
+    "randomizeWordColors": true
   }
 }

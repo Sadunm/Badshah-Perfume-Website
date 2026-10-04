@@ -20,6 +20,7 @@ const FALLBACK_SETTINGS: SiteSettings = {
   backgroundColor: '#000000',
   textColor: '#ffffff',
   accentColor: '#34d399',
+  randomizeWordColors: true,
 
   // HERO & BANNERS
   heroTitle: 'Crafted for Kings & Royalty',
