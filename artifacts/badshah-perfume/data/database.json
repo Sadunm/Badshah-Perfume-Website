@@ -17,7 +17,15 @@
       "createdAt": "2026-09-29T18:11:04.691Z"
     }
   ],
-  "customers": [],
+  "customers": [
+    {
+      "id": "cust-1791086925042-8ifo",
+      "name": "আবুল হোসেন",
+      "phone": "০১৮৩৭৮০৫৩৪৩",
+      "passwordHash": "$2b$10$9rRjwT2/cJ2PGGC62h8GAuHC2AVlQ5NWE0JKu1ChuB4feSNuM0efu",
+      "createdAt": "2026-10-04T04:08:45.125Z"
+    }
+  ],
   "coupons": [],
   "customRequests": [],
   "pushSubscriptions": [],
@@ -17635,7 +17643,14 @@
     "heroSubtitle": "কারন আমাদের প্রতিটা পারফিউমেই নিশ্চিত করা হয়  সর্বোচ্চ কোয়ালিটি  এবং যুক্তিসঙ্গত দাম । \nআপনার পছন্দের যেকোন পারফিউম  আমাদের কাছে পাবেন । ",
     "heroButtonText": "আমাদের কালেকশন সমূহ",
     "heroButtonDestination": "#collections",
-    "featuredProductIds": [],
+    "featuredProductIds": [
+      "prod-blue-de-chanel-42",
+      "prod-dior-sauvage-78",
+      "prod-creed-aventus-67",
+      "prod-cool-water-w-64",
+      "prod-one-million-183",
+      "prod-vampire-blood-262"
+    ],
     "trustItems": [
       {
         "title": "১০০% প্রিমিয়াম ইনগ্রেডিয়েন্টস",
@@ -17722,6 +17737,6 @@
     "homepageBannerImageUrl": "",
     "authBackgroundImageUrl": "https://images.unsplash.com/photo-1615634260167-c8cdede054de?auto=format&fit=crop&q=80&w=1200",
     "defaultBottleImageUrl": "/images/perfume-bottle-template.png",
-    "randomizeWordColors": true
+    "randomizeWordColors": false
   }
 }
