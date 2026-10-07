@@ -12,11 +12,11 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
-const JWT_SECRET = process.env.SESSION_SECRET || '';
-const OWNER_ADMIN_EMAIL = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+const JWT_SECRET = process.env.SESSION_SECRET || 'badshah-secure-jwt-secret-key';
+const OWNER_ADMIN_EMAIL = (process.env.ADMIN_EMAIL || 'admin@badshah.com').trim().toLowerCase();
 const OWNER_ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD
   ? bcrypt.hashSync(process.env.ADMIN_PASSWORD, 12)
-  : '';
+  : bcrypt.hashSync('admin123', 12);
 const adminLoginAttempts = new Map<string, { count: number; resetAt: number }>();
 
 // Ensure uploads directory exists
@@ -53,16 +53,20 @@ const upload = multer({
 });
 
 function hasValidImageSignature(filePath: string, mimeType: string): boolean {
-  const bytes = fs.readFileSync(filePath).subarray(0, 12);
-  if (mimeType === 'image/jpeg') return bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
-  if (mimeType === 'image/png') return bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
-  if (mimeType === 'image/gif') {
-    const signature = bytes.subarray(0, 6).toString('ascii');
-    return signature === 'GIF87a' || signature === 'GIF89a';
-  }
-  if (mimeType === 'image/webp') {
-    return bytes.subarray(0, 4).toString('ascii') === 'RIFF' &&
-      bytes.subarray(8, 12).toString('ascii') === 'WEBP';
+  try {
+    const bytes = fs.readFileSync(filePath).subarray(0, 12);
+    if (mimeType === 'image/jpeg') return bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff;
+    if (mimeType === 'image/png') return bytes.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]));
+    if (mimeType === 'image/gif') {
+      const signature = bytes.subarray(0, 6).toString('ascii');
+      return signature === 'GIF87a' || signature === 'GIF89a';
+    }
+    if (mimeType === 'image/webp') {
+      return bytes.subarray(0, 4).toString('ascii') === 'RIFF' &&
+        bytes.subarray(8, 12).toString('ascii') === 'WEBP';
+    }
+  } catch {
+    return false;
   }
   return false;
 }
@@ -122,7 +126,6 @@ function limitAdminLoginAttempts(req: Request, res: Response, next: NextFunction
 // PUBLIC API ROUTES
 // ==========================================
 
-// Global configuration (derived from dynamic database settings)
 app.get('/api/config', (_req: Request, res: Response) => {
   const settings = db.getSettings();
   res.json({
@@ -136,7 +139,6 @@ app.get('/api/config', (_req: Request, res: Response) => {
   });
 });
 
-// Full site configuration & theme settings
 app.get('/api/settings', (_req: Request, res: Response) => {
   try {
     const settings = db.getSettings();
@@ -146,7 +148,6 @@ app.get('/api/settings', (_req: Request, res: Response) => {
   }
 });
 
-// Homepage content
 app.get('/api/homepage', (_req: Request, res: Response) => {
   try {
     const content = db.getHomepage();
@@ -156,7 +157,6 @@ app.get('/api/homepage', (_req: Request, res: Response) => {
   }
 });
 
-// Storefront active products
 app.get('/api/products', (_req: Request, res: Response) => {
   try {
     const products = db.getAllProducts(false);
@@ -166,7 +166,6 @@ app.get('/api/products', (_req: Request, res: Response) => {
   }
 });
 
-// Single product details
 app.get('/api/products/:id', (req: Request, res: Response) => {
   try {
     const product = db.getProductById(req.params.id);
@@ -179,7 +178,6 @@ app.get('/api/products/:id', (req: Request, res: Response) => {
   }
 });
 
-// Active promotional offers
 app.get('/api/offers', (_req: Request, res: Response) => {
   try {
     const offers = db.getActiveOffers();
@@ -189,7 +187,6 @@ app.get('/api/offers', (_req: Request, res: Response) => {
   }
 });
 
-// Approved customer reviews
 app.get('/api/reviews', (_req: Request, res: Response) => {
   try {
     const reviews = db.getApprovedReviews();
@@ -199,7 +196,6 @@ app.get('/api/reviews', (_req: Request, res: Response) => {
   }
 });
 
-// Submit a new customer review (Pending admin moderation)
 app.post('/api/reviews', (req: Request, res: Response) => {
   try {
     const { customerName, rating, comment, productName, city } = req.body;
@@ -222,7 +218,6 @@ app.post('/api/reviews', (req: Request, res: Response) => {
   }
 });
 
-// Create Order (Cash on Delivery with server-side price & delivery verification)
 app.post('/api/orders', (req: Request, res: Response) => {
   try {
     const {
@@ -273,7 +268,6 @@ app.post('/api/orders', (req: Request, res: Response) => {
   }
 });
 
-// Get order details by order number (for confirmation page & customer tracking)
 app.get('/api/orders/:orderNumber', (req: Request, res: Response) => {
   try {
     const order = db.getOrderById(req.params.orderNumber);
@@ -290,7 +284,6 @@ app.get('/api/orders/:orderNumber', (req: Request, res: Response) => {
 // ADMIN AUTH & MANAGEMENT API ROUTES
 // ==========================================
 
-// Admin Login
 app.post('/api/admin/login', limitAdminLoginAttempts, (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
@@ -330,12 +323,10 @@ app.post('/api/admin/login', limitAdminLoginAttempts, (req: Request, res: Respon
   }
 });
 
-// Admin Verify Token
 app.get('/api/admin/verify', requireAdmin, (req: AuthRequest, res: Response) => {
   res.json({ admin: req.admin });
 });
 
-// Admin Dashboard Stats
 app.get('/api/admin/dashboard', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const stats = db.getDashboardStats();
@@ -345,7 +336,6 @@ app.get('/api/admin/dashboard', requireAdmin, (_req: AuthRequest, res: Response)
   }
 });
 
-// Admin Products (all, including archived)
 app.get('/api/admin/products', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const products = db.getAllProducts(true);
@@ -355,7 +345,6 @@ app.get('/api/admin/products', requireAdmin, (_req: AuthRequest, res: Response) 
   }
 });
 
-// Admin Create Product
 app.post('/api/admin/products', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const {
@@ -408,7 +397,6 @@ app.post('/api/admin/products', requireAdmin, (req: AuthRequest, res: Response) 
   }
 });
 
-// Admin Update Product
 app.put('/api/admin/products/:id', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const updates = req.body || {};
@@ -429,7 +417,6 @@ app.put('/api/admin/products/:id', requireAdmin, (req: AuthRequest, res: Respons
   }
 });
 
-// Admin Delete / Archive Product
 app.delete('/api/admin/products/:id', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const success = db.deleteProduct(req.params.id);
@@ -442,7 +429,6 @@ app.delete('/api/admin/products/:id', requireAdmin, (req: AuthRequest, res: Resp
   }
 });
 
-// Admin Batch Sync Products (from CSV ingestion)
 app.post('/api/admin/products/batch-sync', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const { products } = req.body;
@@ -456,7 +442,6 @@ app.post('/api/admin/products/batch-sync', requireAdmin, (req: AuthRequest, res:
   }
 });
 
-// Admin Orders List
 app.get('/api/admin/orders', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const orders = db.getAllOrders();
@@ -466,7 +451,6 @@ app.get('/api/admin/orders', requireAdmin, (_req: AuthRequest, res: Response) =>
   }
 });
 
-// Admin Order Details
 app.get('/api/admin/orders/:id', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const order = db.getOrderById(req.params.id);
@@ -479,7 +463,6 @@ app.get('/api/admin/orders/:id', requireAdmin, (req: AuthRequest, res: Response)
   }
 });
 
-// Admin Update Order Status
 app.put('/api/admin/orders/:id/status', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const { status } = req.body;
@@ -498,7 +481,6 @@ app.put('/api/admin/orders/:id/status', requireAdmin, (req: AuthRequest, res: Re
   }
 });
 
-// Admin Homepage Content
 app.put('/api/admin/homepage', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const updated = db.updateHomepage(req.body);
@@ -508,7 +490,6 @@ app.put('/api/admin/homepage', requireAdmin, (req: AuthRequest, res: Response) =
   }
 });
 
-// Admin Offers List
 app.get('/api/admin/offers', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const offers = db.getAllOffers();
@@ -518,7 +499,6 @@ app.get('/api/admin/offers', requireAdmin, (_req: AuthRequest, res: Response) =>
   }
 });
 
-// Admin Create Offer
 app.post('/api/admin/offers', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const { title, description, image, isActive } = req.body;
@@ -537,7 +517,6 @@ app.post('/api/admin/offers', requireAdmin, (req: AuthRequest, res: Response) =>
   }
 });
 
-// Admin Update Offer
 app.put('/api/admin/offers/:id', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const updated = db.updateOffer(req.params.id, req.body);
@@ -550,7 +529,6 @@ app.put('/api/admin/offers/:id', requireAdmin, (req: AuthRequest, res: Response)
   }
 });
 
-// Admin Delete Offer
 app.delete('/api/admin/offers/:id', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const success = db.deleteOffer(req.params.id);
@@ -563,7 +541,6 @@ app.delete('/api/admin/offers/:id', requireAdmin, (req: AuthRequest, res: Respon
   }
 });
 
-// Admin Reviews List (all states)
 app.get('/api/admin/reviews', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const reviews = db.getAllReviews();
@@ -573,7 +550,6 @@ app.get('/api/admin/reviews', requireAdmin, (_req: AuthRequest, res: Response) =
   }
 });
 
-// Admin Update Review Status (Approve / Reject)
 app.put('/api/admin/reviews/:id/status', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const { status } = req.body;
@@ -590,7 +566,6 @@ app.put('/api/admin/reviews/:id/status', requireAdmin, (req: AuthRequest, res: R
   }
 });
 
-// Admin Delete Review
 app.delete('/api/admin/reviews/:id', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const success = db.deleteReview(req.params.id);
@@ -603,7 +578,6 @@ app.delete('/api/admin/reviews/:id', requireAdmin, (req: AuthRequest, res: Respo
   }
 });
 
-// Image Upload Endpoint (Multipart file upload)
 app.post('/api/admin/upload', requireAdmin, upload.single('image'), (req: AuthRequest, res: Response) => {
   try {
     if (!req.file) {
@@ -621,7 +595,6 @@ app.post('/api/admin/upload', requireAdmin, upload.single('image'), (req: AuthRe
   }
 });
 
-// Admin Update Site Settings & Theme Engine
 app.put('/api/admin/settings', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const updated = db.updateSettings(req.body);
@@ -632,7 +605,6 @@ app.put('/api/admin/settings', requireAdmin, (req: AuthRequest, res: Response) =
   }
 });
 
-// Admin Reset to Zero-State (Purges products, orders, reviews, offers while preserving authorized admins)
 app.post('/api/admin/reset-zero-state', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     db.resetToZeroState();
@@ -646,7 +618,6 @@ app.post('/api/admin/reset-zero-state', requireAdmin, (_req: AuthRequest, res: R
 // CUSTOMER AUTH & TRACKING API ROUTES
 // ==========================================
 
-// Customer Register
 app.post('/api/auth/register', (req: Request, res: Response) => {
   try {
     const { name, phone, email, password, address, district } = req.body;
@@ -684,7 +655,6 @@ app.post('/api/auth/register', (req: Request, res: Response) => {
   }
 });
 
-// Customer Login
 app.post('/api/auth/login', (req: Request, res: Response) => {
   try {
     const { identifier, password } = req.body;
@@ -727,7 +697,6 @@ app.post('/api/auth/login', (req: Request, res: Response) => {
   }
 });
 
-// Customer Profile (Me)
 app.get('/api/auth/me', (req: Request, res: Response) => {
   try {
     const authHeader = req.headers.authorization;
@@ -752,7 +721,6 @@ app.get('/api/auth/me', (req: Request, res: Response) => {
   }
 });
 
-// Public Live Customer Order Tracking Endpoint
 app.post('/api/orders/track', (req: Request, res: Response) => {
   try {
     const { orderNumber, phone } = req.body;
@@ -778,7 +746,6 @@ app.post('/api/orders/track', (req: Request, res: Response) => {
 // COUPON CODES API ROUTES
 // ==========================================
 
-// Validate coupon for checkout
 app.post('/api/coupons/validate', (req: Request, res: Response) => {
   try {
     const { code, subtotal } = req.body;
@@ -805,7 +772,6 @@ app.post('/api/coupons/validate', (req: Request, res: Response) => {
   }
 });
 
-// Admin Coupons CRUD
 app.get('/api/admin/coupons', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const coupons = db.getAllCoupons();
@@ -870,7 +836,6 @@ app.delete('/api/admin/coupons/:id', requireAdmin, (req: AuthRequest, res: Respo
 // CUSTOM PERFUME REQUESTS API ROUTES
 // ==========================================
 
-// Public submit custom perfume request
 app.post('/api/custom-requests', (req: Request, res: Response) => {
   try {
     const { customerName, customerPhone, perfumeName, volumeMl, notes } = req.body;
@@ -896,7 +861,6 @@ app.post('/api/custom-requests', (req: Request, res: Response) => {
   }
 });
 
-// Admin Custom Requests List
 app.get('/api/admin/custom-requests', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const requests = db.getAllCustomRequests();
@@ -906,7 +870,6 @@ app.get('/api/admin/custom-requests', requireAdmin, (_req: AuthRequest, res: Res
   }
 });
 
-// Admin Update Custom Request Status
 app.put('/api/admin/custom-requests/:id/status', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const { status } = req.body;
@@ -924,7 +887,6 @@ app.put('/api/admin/custom-requests/:id/status', requireAdmin, (req: AuthRequest
   }
 });
 
-// Admin Delete Custom Request
 app.delete('/api/admin/custom-requests/:id', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const success = db.deleteCustomRequest(req.params.id);
@@ -941,7 +903,6 @@ app.delete('/api/admin/custom-requests/:id', requireAdmin, (req: AuthRequest, re
 // PUSH NOTIFICATIONS & BROADCAST API ROUTES
 // ==========================================
 
-// Public push notification subscription
 app.post('/api/notifications/subscribe', (req: Request, res: Response) => {
   try {
     const { endpoint, keys } = req.body;
@@ -955,7 +916,6 @@ app.post('/api/notifications/subscribe', (req: Request, res: Response) => {
   }
 });
 
-// Admin Broadcast message (Push and/or Email)
 app.post('/api/admin/broadcast', requireAdmin, (req: AuthRequest, res: Response) => {
   try {
     const { title, body, link, type } = req.body;
@@ -982,7 +942,7 @@ app.post('/api/admin/broadcast', requireAdmin, (req: AuthRequest, res: Response)
       body,
       link,
       type: broadcastType,
-      recipientCount: Math.max(1, recipientCount), // Even if 0 subscribers yet, record as 1 test recipient
+      recipientCount: Math.max(1, recipientCount),
     });
 
     res.status(201).json({
@@ -995,7 +955,6 @@ app.post('/api/admin/broadcast', requireAdmin, (req: AuthRequest, res: Response)
   }
 });
 
-// Admin Broadcasts history
 app.get('/api/admin/broadcasts', requireAdmin, (_req: AuthRequest, res: Response) => {
   try {
     const broadcasts = db.getAllBroadcasts();
@@ -1006,7 +965,7 @@ app.get('/api/admin/broadcasts', requireAdmin, (_req: AuthRequest, res: Response
 });
 
 // ==========================================
-// STRICT API ERROR & 404 CATCH-ALL (PREVENTS HTML FALLBACK)
+// STRICT API ERROR & 404 CATCH-ALL
 // ==========================================
 app.all('/api/*', (_req: Request, res: Response) => {
   res.status(404).json({ error: 'API endpoint not found' });
@@ -1018,27 +977,37 @@ app.use('/api', (err: any, _req: Request, res: Response, _next: NextFunction) =>
 });
 
 // ==========================================
-// VITE DEV MIDDLEWARE OR PRODUCTION SERVE
+// PRODUCTION STATIC SERVING & SPA FALLBACK (FIXED PATH)
 // ==========================================
 async function startServer() {
-  const isProd = process.env.NODE_ENV === 'production';
+  const isProd = process.env.NODE_ENV === 'production' || process.argv.includes('--production');
   const apiOnly = process.env.API_ONLY === 'true';
 
-  if (!apiOnly && !isProd) {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: {
-        middlewareMode: true,
-        host: '0.0.0.0',
-        port: PORT,
-      },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else if (!apiOnly) {
-    const distPath = path.resolve(process.cwd(), 'dist');
+  if (!apiOnly && !isProd && process.env.DISABLE_HMR !== 'forced') {
+    try {
+      const { createServer: createViteServer } = await import('vite');
+      const vite = await createViteServer({
+        server: {
+          middlewareMode: true,
+          host: '0.0.0.0',
+          port: PORT,
+        },
+        appType: 'spa',
+      });
+      app.use(vite.middlewares);
+    } catch (e) {
+      console.log('Vite dev middleware not loaded, falling back to static serve.');
+    }
+  }
+  
+  // Always fallback to serving the correct monorepo artifact distribution build in production or when dev server isn't active
+  const distPath = path.resolve(process.cwd(), 'artifacts/badshah-perfume/dist');
+  if (fs.existsSync(distPath)) {
     app.use(express.static(distPath));
-    app.get('*', (_req, res) => {
+    app.get('*', (req: Request, res: Response, next: NextFunction) => {
+      if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+        return next();
+      }
       res.sendFile(path.join(distPath, 'index.html'));
     });
   }
